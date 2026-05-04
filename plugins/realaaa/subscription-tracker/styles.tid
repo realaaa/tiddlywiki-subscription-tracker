@@ -9,7 +9,13 @@ tags: $:/tags/Stylesheet
     border-collapse: collapse;
     font-size: 0.95em;
     margin-top: 1em;
+    table-layout: auto;
 }
+/* Guard against TW wikitext inserting stray <p> inside table sections,
+   which the browser would otherwise foster-parent out and break column
+   alignment between thead and tbody. display:contents makes the <p>
+   transparent to layout while keeping its children in place. */
+.sub-table p { display: contents; margin: 0; padding: 0; }
 .sub-table th,
 .sub-table td {
     padding: 8px 12px;
@@ -24,6 +30,14 @@ tags: $:/tags/Stylesheet
 .sub-table td.num {
     text-align: right;
     font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+/* Keep the Name column reasonable but allow long names to wrap rather than
+   stretch the column at the cost of every other column. */
+.sub-table th:first-child,
+.sub-table td:first-child {
+    max-width: 18em;
+    word-break: break-word;
 }
 .sub-table tr:hover {
     background: <<colour table-footer-background>>;
