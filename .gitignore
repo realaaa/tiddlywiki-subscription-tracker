@@ -20,8 +20,11 @@ mcp.memory.json
 # Other Dependencies - Build and output files
 node_modules/
 vendor/
-dist/
 build/
+# dist/ is intentionally tracked — it holds the release JSON for drop-in
+# install. Ignore everything else inside dist/ that isn't a release artifact.
+dist/*
+!dist/*.json
 
 # Claude Code local settings
 .claude/settings.local.json

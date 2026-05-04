@@ -1,0 +1,117 @@
+# Subscription Tracker for TiddlyWiki
+
+A vanilla TiddlyWiki 5.4+ plugin that turns `subscriptions`-tagged tiddlers into a Notion-style table with multi-currency monthly + yearly cost math, trial countdowns, render-time auto-rolled renewal dates, and a structured editor.
+
+**Plugin id:** `$:/plugins/realaaa/subscription-tracker` · **License:** MIT · **Current version:** 0.1.1
+
+![Screenshot reference (from Notion, the design target)](example%20subscriptions%20summary%20table%20view%20from%20Notion.png)
+
+## Features
+
+- **Notion-style table** with status pills (Active / Trial / Paused / Canceled), category-tag pills, billing-frequency, renewal date, native amount, monthly equivalent, yearly equivalent.
+- **Multi-currency.** Each subscription stores its native currency. Monthly / yearly columns and totals convert to a single configurable display currency via a user-maintained rates tiddler.
+- **Render-time auto-roll** for renewal dates: if the stored `renewal-date` is in the past for an Active/Trial/Paused sub, the displayed date rolls forward by `billing-frequency` chunks until it's in the future. The stored field is never mutated, so `git diff` stays clean.
+- **Trial countdown** via a `trial-ends` field, separately from `renewal-date`.
+- **Structured EditTemplate.** Tiddlers tagged with `subscriptions` get a labeled form (status / billing / amount / currency / dates / URLs / payment hint) instead of TW's default field editor.
+- **+ New subscription** button on the main view.
+- **Filter dropdowns:** status (Active+Trial+Paused / All / Active / Trial / Paused / Canceled) and category-tag.
+- **Sort dropdown:** Name, Next renewal, Monthly cost (high→low), Yearly cost (high→low).
+- **Strict data hygiene.** Missing currency rate, missing trial-ends on a Trial sub, or display-currency misconfiguration each surface as a banner above the table with a counter — failing visibly rather than silently lying about totals.
+- **No external plugin dependencies.** Two small in-plugin JS filter modules cover the date arithmetic that TW 5.4 core lacks; everything else is pure WikiText + CSS.
+
+## Install
+
+The plugin can be installed two ways depending on how you run TiddlyWiki.
+
+### A) Single-file drop-in (any TiddlyWiki 5.4+ wiki)
+
+Drag and drop [`dist/subscription-tracker-0.1.1.json`](dist/subscription-tracker-0.1.1.json) onto your wiki's import area. Save the wiki. The shadow tiddler `Subscriptions` becomes available immediately — open it via direct URL fragment `#Subscriptions`, the top search box, or the sidebar's **More → Shadows** tab.
+
+### B) Node.js install (separate-tiddler-files mode)
+
+If your wiki runs on `tiddlywiki` from npm with a folder of `.tid` files:
+
+1. Clone or copy this repo somewhere accessible. The plugin folder is `plugins/realaaa/subscription-tracker/`.
+2. Either:
+   - **Symlink** the plugin into your wiki: `ln -s /path/to/this/repo/plugins/realaaa /your-wiki/plugins/realaaa`
+   - **Copy** the folder: `cp -R plugins/realaaa /your-wiki/plugins/realaaa`
+   - **Or set the env var** when starting your wiki: `TIDDLYWIKI_PLUGIN_PATH=/path/to/this/repo/plugins tiddlywiki /your-wiki ...`
+3. Add the plugin to your wiki's `tiddlywiki.info` `plugins` array:
+   ```json
+   {
+     "plugins": [
+       "tiddlywiki/filesystem",
+       "tiddlywiki/tiddlyweb",
+       "realaaa/subscription-tracker"
+     ]
+   }
+   ```
+   The env var only adds search paths — TW still needs the `plugins` array entry to load it.
+4. Restart your wiki.
+
+## Use
+
+1. **Open the `Subscriptions` view.** Direct URL `#Subscriptions`, top search box, or sidebar **More → Shadows**.
+2. **Add subscriptions.** Click **+ New subscription** on the view, or tag any tiddler with `subscriptions` plus 1+ category tag (`Entertainment`, `Productivity`, etc.). The custom edit form appears whenever you edit a `subscriptions`-tagged tiddler.
+3. **Required fields per subscription:** `status`, `billing-frequency`, `amount`, `currency`, plus `renewal-date` for non-Canceled subs and `trial-ends` for Trial subs.
+
+## Configure
+
+- **`$:/plugins/realaaa/subscription-tracker/config/settings`** — display currency (default AUD), tag-name (default `subscriptions`), renewal-soon threshold in days (default 14), show-canceled-default (default `no`).
+- **`$:/plugins/realaaa/subscription-tracker/config/rates`** — JSON map of currency rates relative to the display currency. Ships with `AUD: 1.0, USD: 1.52, EUR: 1.65, GBP: 1.92`. Update when rates drift; the display-currency entry must always be `1.0`.
+
+## Roadmap
+
+- **v0.2** — proper monthly/yearly-cost sort that normalises across billing-frequency, display-currency toggle UI, dedicated "no subscriptions yet" empty state.
+- **v0.3** — lifetime / historical spend (`started-date` field).
+- **v0.4** — family / shared subs (`shared-with` field, effective-cost split).
+- **v0.5** — TiddlyTools/Time/Alarms integration for actual reminder notifications.
+
+## Develop
+
+The repo is a TiddlyWiki plugin source tree plus tests:
+
+```
+plugins/realaaa/subscription-tracker/   plugin source
+tests/wiki/                             bare TW node wiki for testing
+tests/render/                           render-test fixtures + expectations.txt
+tests/fixtures/                         manual end-to-end fixture set
+tests/test-plan.md                      12-scenario manual test
+bin/run-render-tests.sh                 fixture-based render runner (39 tests)
+bin/test-build.sh                       plugin-packaging smoke
+docs/superpowers/specs/                 design spec (source of intent)
+docs/superpowers/plans/                 implementation plan
+subscription-tracker-analysis.md        prior ecosystem analysis
+```
+
+To work on the plugin:
+
+```bash
+# Run the wiki for browser testing
+cp tests/fixtures/*.tid tests/wiki/tiddlers/
+TIDDLYWIKI_PLUGIN_PATH=$(pwd)/plugins tiddlywiki tests/wiki --listen host=127.0.0.1 port=8088
+# Open http://127.0.0.1:8088/#Subscriptions
+
+# Run render tests after edits
+bin/run-render-tests.sh
+
+# Smoke test the plugin builds cleanly
+bin/test-build.sh
+
+# Rebuild dist JSON
+TIDDLYWIKI_PLUGIN_PATH=$(pwd)/plugins tiddlywiki tests/wiki \
+    --output dist \
+    --savetiddler '$:/plugins/realaaa/subscription-tracker' subscription-tracker-0.1.1.json
+```
+
+If render tests behave weirdly, check `tests/wiki/tiddlers/` for stale fixture leftovers from interrupted runs and clean them:
+
+```bash
+find tests/wiki/tiddlers/ -name "*.tid" -not -name '$__StoryList.tid' -delete
+```
+
+## Credits
+
+- Design discussion + ecosystem analysis: see `subscription-tracker-analysis.md`.
+- Notion-style design reference: the screenshot in repo root.
+- Inspiration: the [TiddlyWiki forum thread on subscription tracking](https://talk.tiddlywiki.org/t/subscriptions-tracker-in-tiddlywiki/12631) (Sunny, Springer, Eric Shulman).
