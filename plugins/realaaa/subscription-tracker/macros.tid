@@ -13,3 +13,7 @@ title: $:/plugins/realaaa/subscription-tracker/macros
 \function sub.monthly-display()
 [subfilter<sub.display-formula>]
 \end
+
+\function sub.yearly-display()
+[<sub.monthly-display>multiply[12]]
+\end

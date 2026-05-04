@@ -1,0 +1,8 @@
+title: macro-yearly-display-yearly
+amount: 100
+billing-frequency: Yearly
+currency: AUD
+
+\import [[$:/plugins/realaaa/subscription-tracker/macros]]
+
+<$tiddler tiddler="macro-yearly-display-yearly"><<sub.yearly-display>></$tiddler>
