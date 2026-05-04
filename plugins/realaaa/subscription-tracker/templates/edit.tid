@@ -1,0 +1,69 @@
+title: $:/plugins/realaaa/subscription-tracker/templates/edit
+tags: $:/tags/EditTemplate
+list-before: $:/core/ui/EditTemplate/body
+
+\import [[$:/plugins/realaaa/subscription-tracker/macros]]
+
+<$list filter="[all[current]tags[]] +[contains{$:/plugins/realaaa/subscription-tracker/config/settings!!tag-name}]" variable="_">
+
+<div class="tc-tiddler-edit-section">
+<h3>Subscription details</h3>
+
+<table class="sub-edit-form">
+<tr>
+  <td>''Status''</td>
+  <td><$select tiddler=<<currentTiddler>> field="status" default="Active">
+        <option value="Active">Active</option>
+        <option value="Trial">Trial</option>
+        <option value="Paused">Paused</option>
+        <option value="Canceled">Canceled</option>
+      </$select></td>
+</tr>
+<tr>
+  <td>''Billing frequency''</td>
+  <td><$select tiddler=<<currentTiddler>> field="billing-frequency" default="Monthly">
+        <option value="Monthly">Monthly</option>
+        <option value="Yearly">Yearly</option>
+        <option value="Quarterly">Quarterly</option>
+        <option value="Weekly">Weekly</option>
+      </$select></td>
+</tr>
+<tr>
+  <td>''Amount''</td>
+  <td><$edit-text tiddler=<<currentTiddler>> field="amount" tag="input" type="number" step="0.01"/></td>
+</tr>
+<tr>
+  <td>''Currency''</td>
+  <td><$select tiddler=<<currentTiddler>> field="currency" default="AUD">
+        <$list filter="[[$:/plugins/realaaa/subscription-tracker/config/rates]indexes[]]" variable="ccy">
+          <option value=<<ccy>>><<ccy>></option>
+        </$list>
+      </$select></td>
+</tr>
+<tr>
+  <td>''Renewal date''</td>
+  <td><$edit-text tiddler=<<currentTiddler>> field="renewal-date" tag="input" type="date"/></td>
+</tr>
+<$list filter="[all[current]field:status[Trial]]" variable="_">
+<tr>
+  <td>''Trial ends''</td>
+  <td><$edit-text tiddler=<<currentTiddler>> field="trial-ends" tag="input" type="date"/></td>
+</tr>
+</$list>
+<tr>
+  <td>''Vendor URL''</td>
+  <td><$edit-text tiddler=<<currentTiddler>> field="vendor-url" tag="input" type="url"/></td>
+</tr>
+<tr>
+  <td>''Cancel URL''</td>
+  <td><$edit-text tiddler=<<currentTiddler>> field="cancel-url" tag="input" type="url"/></td>
+</tr>
+<tr>
+  <td>''Payment method''</td>
+  <td><$edit-text tiddler=<<currentTiddler>> field="payment-method" tag="input" type="text" placeholder="Visa ••4242"/>
+      <small>Last 4 digits only</small></td>
+</tr>
+</table>
+</div>
+
+</$list>
