@@ -1,3 +1,3 @@
 title: settings-display-currency
 
-<$transclude tiddler="$:/plugins/realaaa/subscription-tracker/config/settings" field="display-currency" />
+{{$:/plugins/realaaa/subscription-tracker/config/settings!!display-currency}}

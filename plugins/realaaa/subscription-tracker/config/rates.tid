@@ -1,12 +1,8 @@
 title: $:/plugins/realaaa/subscription-tracker/config/rates
 type: application/json
-AUD: 1
-USD: 1.52
-EUR: 1.65
-GBP: 1.92
 
 {
-    "AUD": 1,
+    "AUD": 1.0,
     "USD": 1.52,
     "EUR": 1.65,
     "GBP": 1.92
