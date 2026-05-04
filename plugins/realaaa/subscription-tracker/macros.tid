@@ -41,3 +41,7 @@ title: $:/plugins/realaaa/subscription-tracker/macros
 \function sub.trial-days-left()
 [{!!status}match[Trial]then{!!trial-ends}!is[blank]daysuntil[]]
 \end
+
+\procedure sub.status-pill(status)
+<span class={{{ [[sub-pill sub-status-]addsuffix<status>lowercase[]] }}}><$text text=<<status>>/></span>
+\end

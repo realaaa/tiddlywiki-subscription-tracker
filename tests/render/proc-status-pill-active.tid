@@ -1,0 +1,5 @@
+title: proc-status-pill-active
+
+\import [[$:/plugins/realaaa/subscription-tracker/macros]]
+
+<<sub.status-pill "Active">>
