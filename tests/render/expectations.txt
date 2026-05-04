@@ -18,3 +18,5 @@ macro-next-renewal-empty	\[\]
 macro-next-renewal-rolled	2026
 macro-days-until-future	26
 macro-days-until-empty	\[\]
+macro-soon-yes	\[10
+macro-soon-no	\[\]

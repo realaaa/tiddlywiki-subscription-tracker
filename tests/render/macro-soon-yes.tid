@@ -1,0 +1,8 @@
+title: macro-soon-yes
+status: Active
+billing-frequency: Monthly
+renewal-date: 20260514000000
+
+\import [[$:/plugins/realaaa/subscription-tracker/macros]]
+
+[<$tiddler tiddler="macro-soon-yes"><<sub.is-renewal-soon>></$tiddler>]
