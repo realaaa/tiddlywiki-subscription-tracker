@@ -1,0 +1,8 @@
+title: macro-monthly-display-missing-rate
+amount: 10
+billing-frequency: Monthly
+currency: XYZ
+
+\import [[$:/plugins/realaaa/subscription-tracker/macros]]
+
+[<$tiddler tiddler="macro-monthly-display-missing-rate"><<sub.monthly-display>></$tiddler>]

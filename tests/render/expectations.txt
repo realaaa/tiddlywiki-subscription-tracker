@@ -7,3 +7,6 @@ macro-monthly-native-monthly	13.99
 macro-monthly-native-yearly	10
 macro-monthly-native-quarterly	10
 macro-monthly-native-weekly	43.3
+macro-monthly-display-aud	10
+macro-monthly-display-usd	15.2
+macro-monthly-display-missing-rate	\[\]
