@@ -25,3 +25,4 @@ macro-trial-days-active	\[\]
 macro-trial-days-no-end	\[\]
 proc-status-pill-active	sub-status-active
 proc-status-pill-canceled	sub-status-canceled
+proc-tag-pill	sub-tag

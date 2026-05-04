@@ -45,3 +45,7 @@ title: $:/plugins/realaaa/subscription-tracker/macros
 \procedure sub.status-pill(status)
 <span class={{{ [[sub-pill sub-status-]addsuffix<status>lowercase[]] }}}><$text text=<<status>>/></span>
 \end
+
+\procedure sub.tag-pill(tag)
+<span class="sub-pill sub-tag"><$text text=<<tag>>/></span>
+\end

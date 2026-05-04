@@ -1,0 +1,5 @@
+title: proc-tag-pill
+
+\import [[$:/plugins/realaaa/subscription-tracker/macros]]
+
+<<sub.tag-pill "Entertainment">>
