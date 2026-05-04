@@ -1,0 +1,9 @@
+title: Bitcoin Miner Pro
+tags: subscriptions Productivity
+status: Active
+billing-frequency: Monthly
+amount: 50
+currency: XYZ
+renewal-date: 21000701000000
+
+Strict missing-rate error path. Should appear with ⚠ glyph + excluded from totals + counted in banner.

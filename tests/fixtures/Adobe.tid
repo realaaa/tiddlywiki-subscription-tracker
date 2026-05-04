@@ -1,0 +1,9 @@
+title: Adobe Creative Cloud
+tags: subscriptions Productivity
+status: Active
+billing-frequency: Yearly
+amount: 599
+currency: USD
+renewal-date: 21010101000000
+
+Tests yearly→monthly math + USD conversion.

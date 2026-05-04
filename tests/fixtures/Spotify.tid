@@ -1,0 +1,10 @@
+title: Spotify
+tags: subscriptions Entertainment
+status: Active
+billing-frequency: Monthly
+amount: 9.99
+currency: USD
+renewal-date: 21000615000000
+vendor-url: https://spotify.com
+
+Tests USD → AUD rate conversion.

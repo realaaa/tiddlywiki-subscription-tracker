@@ -1,0 +1,10 @@
+title: Notion AI Trial
+tags: subscriptions Productivity
+status: Trial
+billing-frequency: Yearly
+amount: 96
+currency: USD
+renewal-date: 21000801000000
+trial-ends: 21000515000000
+
+Trial happy path — has trial-ends.

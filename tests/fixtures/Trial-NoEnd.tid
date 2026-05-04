@@ -1,0 +1,8 @@
+title: Adobe Free Trial
+tags: subscriptions Productivity
+status: Trial
+billing-frequency: Monthly
+amount: 0
+currency: AUD
+
+Strict trial-ends-missing error. Counted in banner; row stays in totals (cost=0 anyway).

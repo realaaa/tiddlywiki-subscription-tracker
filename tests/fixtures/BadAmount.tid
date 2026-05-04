@@ -1,0 +1,9 @@
+title: Mystery Charge
+tags: subscriptions Productivity
+status: Active
+billing-frequency: Monthly
+amount: oops
+currency: AUD
+renewal-date: 21000701000000
+
+Invalid amount. Renders ? in amount cell — but row is NOT excluded from totals in v1 (no automated invalid-amount detection).

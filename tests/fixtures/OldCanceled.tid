@@ -1,0 +1,9 @@
+title: MoviePass
+tags: subscriptions Entertainment
+status: Canceled
+billing-frequency: Monthly
+amount: 9.95
+currency: USD
+renewal-date: 20180101000000
+
+Canceled with stale renewal-date. Should display as-is (no auto-roll for Canceled).

@@ -1,0 +1,9 @@
+title: Old Domain Registration
+tags: subscriptions Productivity
+status: Active
+billing-frequency: Yearly
+amount: 30
+currency: AUD
+renewal-date: 20100315000000
+
+Renewal date 16 years in the past. Auto-roll should display next future occurrence.
