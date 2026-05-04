@@ -1,0 +1,20 @@
+{
+    "description": "Test wiki for subscription-tracker plugin development",
+    "plugins": [
+        "tiddlywiki/filesystem",
+        "tiddlywiki/tiddlyweb"
+    ],
+    "themes": [
+        "tiddlywiki/vanilla",
+        "tiddlywiki/snowwhite"
+    ],
+    "includeWikis": [],
+    "build": {
+        "plugin": [
+            "--rendertiddler",
+            "$:/core/save/all-external-js",
+            "build/index.html",
+            "text/plain"
+        ]
+    }
+}
