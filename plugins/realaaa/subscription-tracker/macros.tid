@@ -29,3 +29,7 @@ title: $:/plugins/realaaa/subscription-tracker/macros
 [{!!status}match[Canceled]then{!!renewal-date}]
 :else[{!!renewal-date}nextrenewal<sub.period-days>]
 \end
+
+\function sub.days-until-renewal()
+[<sub.next-renewal>!is[blank]daysuntil[]]
+\end
