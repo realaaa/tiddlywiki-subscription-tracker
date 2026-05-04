@@ -37,8 +37,8 @@ while IFS=$'\t' read -r title expected; do
     out_file="$TMPDIR/${title//[\/$:]/_}.html"
     TIDDLYWIKI_PLUGIN_PATH="$PLUGIN_PATH" \
         tiddlywiki "$WIKI" \
-        --rendertiddler "$title" "$(basename "$out_file")" "text/html" \
-        --output "$TMPDIR" >/dev/null 2>&1
+        --output "$TMPDIR" \
+        --rendertiddler "$title" "$(basename "$out_file")" "text/html" >/dev/null 2>&1
     if grep -q -- "$expected" "$out_file"; then
         echo "PASS: $title"
         passed=$((passed + 1))
