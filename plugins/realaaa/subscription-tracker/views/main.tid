@@ -4,6 +4,41 @@ title: $:/plugins/realaaa/subscription-tracker/views/main
 
 \function subs.tag-name() [{$:/plugins/realaaa/subscription-tracker/config/settings!!tag-name}]
 \function subs.display-currency() [{$:/plugins/realaaa/subscription-tracker/config/settings!!display-currency}]
+\function subs.status-filter() [{$:/state/subscription-tracker/filter!!status-filter}!is[blank]] :else[[active]]
+\function subs.tag-filter-set() [{$:/state/subscription-tracker/filter!!tag-filter}!is[blank]] :else[[__NONE__]]
+\function subs.tag-filter() [{$:/state/subscription-tracker/filter!!tag-filter}]
+\function subs.sort-key() [{$:/state/subscription-tracker/filter!!sort}!is[blank]] :else[[renewal]]
+
+\procedure sub.row()
+<tr>
+  <td><$link to=<<currentTiddler>>><<currentTiddler>></$link></td>
+  <td><$macrocall $name="sub.status-pill" status={{!!status}}/></td>
+  <td>
+    <$list filter="[all[current]tags[]] -[<subs.tag-name>]" variable="t">
+      <$macrocall $name="sub.tag-pill" tag=<<t>>/>
+    </$list>
+  </td>
+  <td>{{!!billing-frequency}}</td>
+  <td>
+    <$list filter="[all[current]field:status[Canceled]]" variable="_" emptyMessage="<$list filter='[<sub.next-renewal>!is[blank]]' variable='_' emptyMessage='—'><span class={{{ [<sub.is-renewal-soon>!is[blank]then[sub-renewal-soon]else[sub-renewal-ok]] }}}><$text text={{{ [<sub.next-renewal>format:date[DDth MMM YYYY]] }}}/></span></$list>">
+      <$list filter="[all[current]get[renewal-date]!is[blank]]" variable="_" emptyMessage="—">
+        <$view field="renewal-date" format="date" template="DDth MMM YYYY"/>
+      </$list>
+    </$list>
+  </td>
+  <td class="num"><$macrocall $name="sub.amount-cell" amount={{!!amount}} currency={{!!currency}}/></td>
+  <td class="num">
+    <$list filter="[all[current]<sub.monthly-display>!is[blank]]" variable="_" emptyMessage="—">
+      <$text text={{{ [<sub.monthly-display>fixed[2]] }}}/>
+    </$list>
+  </td>
+  <td class="num">
+    <$list filter="[all[current]<sub.yearly-display>!is[blank]]" variable="_" emptyMessage="—">
+      <$text text={{{ [<sub.yearly-display>fixed[2]] }}}/>
+    </$list>
+  </td>
+</tr>
+\end
 
 ! Subscriptions
 
@@ -69,3 +104,50 @@ title: $:/plugins/realaaa/subscription-tracker/views/main
 </$button>
 
 </div>
+
+<!-- ===== Table ===== -->
+
+<table class="sub-table">
+<thead>
+<tr>
+    <th>Name</th>
+    <th>Status</th>
+    <th>Tags</th>
+    <th>Billing</th>
+    <th>Renewal</th>
+    <th class="num">Amount</th>
+    <th class="num">Monthly (<<subs.display-currency>>)</th>
+    <th class="num">Yearly (<<subs.display-currency>>)</th>
+</tr>
+</thead>
+<tbody>
+
+<$list filter="[<subs.status-filter>match[active]]" variable="_">
+  <$list filter="[<subs.tag-filter-set>match[__NONE__]]" variable="__">
+    <$list filter="[tag<subs.tag-name>!field:status[Canceled]] +[sortsub:date<sub.next-renewal>]" emptyMessage="<tr><td colspan='8' class='sub-empty'>No subscriptions match the current filters.</td></tr>"><<sub.row>></$list>
+  </$list>
+  <$list filter="[<subs.tag-filter-set>!match[__NONE__]]" variable="__">
+    <$list filter="[tag<subs.tag-name>!field:status[Canceled]tag<subs.tag-filter>]" emptyMessage="<tr><td colspan='8' class='sub-empty'>No subscriptions match the current filters.</td></tr>"><<sub.row>></$list>
+  </$list>
+</$list>
+
+<$list filter="[<subs.status-filter>match[all]]" variable="_">
+  <$list filter="[<subs.tag-filter-set>match[__NONE__]]" variable="__">
+    <$list filter="[tag<subs.tag-name>] +[sortsub:date<sub.next-renewal>]" emptyMessage="<tr><td colspan='8' class='sub-empty'>No subscriptions match the current filters.</td></tr>"><<sub.row>></$list>
+  </$list>
+  <$list filter="[<subs.tag-filter-set>!match[__NONE__]]" variable="__">
+    <$list filter="[tag<subs.tag-name>tag<subs.tag-filter>] +[sortsub:date<sub.next-renewal>]" emptyMessage="<tr><td colspan='8' class='sub-empty'>No subscriptions match the current filters.</td></tr>"><<sub.row>></$list>
+  </$list>
+</$list>
+
+<$list filter="[<subs.status-filter>!match[active]!match[all]]" variable="_">
+  <$list filter="[<subs.tag-filter-set>match[__NONE__]]" variable="__">
+    <$list filter="[tag<subs.tag-name>field:status<subs.status-filter>] +[sortsub:date<sub.next-renewal>]" emptyMessage="<tr><td colspan='8' class='sub-empty'>No subscriptions match the current filters.</td></tr>"><<sub.row>></$list>
+  </$list>
+  <$list filter="[<subs.tag-filter-set>!match[__NONE__]]" variable="__">
+    <$list filter="[tag<subs.tag-name>field:status<subs.status-filter>tag<subs.tag-filter>] +[sortsub:date<sub.next-renewal>]" emptyMessage="<tr><td colspan='8' class='sub-empty'>No subscriptions match the current filters.</td></tr>"><<sub.row>></$list>
+  </$list>
+</$list>
+
+</tbody>
+</table>
