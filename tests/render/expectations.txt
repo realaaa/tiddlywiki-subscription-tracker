@@ -12,3 +12,7 @@ macro-monthly-display-usd	15.2
 macro-monthly-display-missing-rate	\[\]
 macro-yearly-display-aud	120
 macro-yearly-display-yearly	100
+macro-next-renewal-future	2099
+macro-next-renewal-canceled	20100101
+macro-next-renewal-empty	\[\]
+macro-next-renewal-rolled	2026

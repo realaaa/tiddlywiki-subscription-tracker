@@ -1,0 +1,8 @@
+title: macro-next-renewal-rolled
+status: Active
+billing-frequency: Monthly
+renewal-date: 20100101000000
+
+\import [[$:/plugins/realaaa/subscription-tracker/macros]]
+
+<$tiddler tiddler="macro-next-renewal-rolled"><<sub.next-renewal>></$tiddler>

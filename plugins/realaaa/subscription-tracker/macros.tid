@@ -17,3 +17,15 @@ title: $:/plugins/realaaa/subscription-tracker/macros
 \function sub.yearly-display()
 [<sub.monthly-display>multiply[12]]
 \end
+
+\function sub.period-days()
+[{!!billing-frequency}match[Monthly]then[30.44]]
+:else[{!!billing-frequency}match[Yearly]then[365.25]]
+:else[{!!billing-frequency}match[Quarterly]then[91.31]]
+:else[{!!billing-frequency}match[Weekly]then[7]]
+\end
+
+\function sub.next-renewal()
+[{!!status}match[Canceled]then{!!renewal-date}]
+:else[{!!renewal-date}nextrenewal<sub.period-days>]
+\end
