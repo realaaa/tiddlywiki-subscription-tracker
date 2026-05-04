@@ -9,9 +9,13 @@ Run this before tagging a release. Estimated time: 15 minutes.
 3. Start a fresh TW node wiki with the plugin:
    ```bash
    cp tests/fixtures/*.tid tests/wiki/tiddlers/
-   TIDDLYWIKI_PLUGIN_PATH=$(pwd)/plugins tiddlywiki tests/wiki --listen --port 8080
+   TIDDLYWIKI_PLUGIN_PATH=$(pwd)/plugins tiddlywiki tests/wiki --listen host=127.0.0.1 port=8088
    ```
-4. Open http://localhost:8080 and click into the `Subscriptions` tiddler.
+   Note: TW's `--listen` takes `host=X port=Y` as named arguments, not GNU-style `--port` flags.
+4. Open http://localhost:8088/#Subscriptions in the browser. The `Subscriptions` view ships as a *shadow tiddler*, so it does not appear in the sidebar's Recent/All tabs by default. Three ways to reach it:
+   - Direct URL: append `/#Subscriptions` (case-sensitive).
+   - Type `Subscriptions` in the top search box and click the result.
+   - Sidebar → ''More'' tab → ''Shadows'' tab → scroll to `Subscriptions`.
 
 ## Scenarios
 

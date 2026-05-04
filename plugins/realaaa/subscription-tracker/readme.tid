@@ -13,7 +13,7 @@ A vanilla TiddlyWiki 5.4+ plugin that turns ''subscriptions''-tagged tiddlers in
 ! Quick start
 
 # Tag any tiddler with `subscriptions` plus 1+ category tag.
-# Open the [[Subscriptions]] view tiddler.
+# Open the [[Subscriptions]] view tiddler. (It ships as a shadow tiddler, so it won't appear in the sidebar's Recent/All tabs by default — type `Subscriptions` in the top search box, or visit `#Subscriptions` directly, or browse the sidebar's ''More → Shadows'' tab.)
 # Click ''+ New subscription'' to add one.
 
 ! Configuration
