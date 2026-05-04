@@ -20,3 +20,6 @@ macro-days-until-future	26
 macro-days-until-empty	\[\]
 macro-soon-yes	\[10
 macro-soon-no	\[\]
+macro-trial-days-trial	\[2
+macro-trial-days-active	\[\]
+macro-trial-days-no-end	\[\]

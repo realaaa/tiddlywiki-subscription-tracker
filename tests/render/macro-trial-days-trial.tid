@@ -1,0 +1,7 @@
+title: macro-trial-days-trial
+status: Trial
+trial-ends: 21000101000000
+
+\import [[$:/plugins/realaaa/subscription-tracker/macros]]
+
+[<$tiddler tiddler="macro-trial-days-trial"><<sub.trial-days-left>></$tiddler>]

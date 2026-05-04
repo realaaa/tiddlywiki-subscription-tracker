@@ -37,3 +37,7 @@ title: $:/plugins/realaaa/subscription-tracker/macros
 \function sub.is-renewal-soon()
 [<sub.days-until-renewal>!is[blank]compare:integer:lteq{$:/plugins/realaaa/subscription-tracker/config/settings!!renewal-soon-days}]
 \end
+
+\function sub.trial-days-left()
+[{!!status}match[Trial]then{!!trial-ends}!is[blank]daysuntil[]]
+\end
