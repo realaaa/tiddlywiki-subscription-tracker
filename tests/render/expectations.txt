@@ -1,1 +1,2 @@
 settings-display-currency	AUD
+rates-aud	1
