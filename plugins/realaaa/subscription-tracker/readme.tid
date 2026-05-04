@@ -1,0 +1,26 @@
+title: $:/plugins/realaaa/subscription-tracker/readme
+
+! Subscription Tracker
+
+A vanilla TiddlyWiki 5.4+ plugin that turns ''subscriptions''-tagged tiddlers into a Notion-style table with:
+
+* multi-currency monthly + yearly totals (single configurable display currency)
+* trial tracking with countdown
+* render-time auto-rolled renewal dates (no field churn)
+* structured editor for adding/editing subscriptions
+* status / sort / tag filtering
+
+! Quick start
+
+# Tag any tiddler with `subscriptions` plus 1+ category tag.
+# Open the [[Subscriptions]] view tiddler.
+# Click ''+ New subscription'' to add one.
+
+! Configuration
+
+* Display currency, tag-name, and renewal-soon threshold: see [[$:/plugins/realaaa/subscription-tracker/config/settings]]
+* Currency rates: see [[$:/plugins/realaaa/subscription-tracker/config/rates]]
+
+! License
+
+MIT.
