@@ -420,7 +420,7 @@ Add a render fixture `tests/render/settings-display-currency.tid`:
 ```
 title: settings-display-currency
 
-{{$:/plugins/realaaa/subscription-tracker/config/settings##display-currency}}
+{{$:/plugins/realaaa/subscription-tracker/config/settings!!display-currency}}
 ```
 
 Add expectation to `tests/render/expectations.txt`:
@@ -1145,7 +1145,7 @@ Append to `macros.tid`:
 
 ```
 \function sub.is-renewal-soon()
-[<sub.days-until-renewal>!is[blank]compare:integer:lteq{$:/plugins/realaaa/subscription-tracker/config/settings##renewal-soon-days}]
+[<sub.days-until-renewal>!is[blank]compare:integer:lteq{$:/plugins/realaaa/subscription-tracker/config/settings!!renewal-soon-days}]
 \end
 ```
 
@@ -1597,7 +1597,7 @@ list-before: $:/core/ui/EditTemplate/body
 
 \import [[$:/plugins/realaaa/subscription-tracker/macros]]
 
-<$list filter="[all[current]tags[]] +[contains{$:/plugins/realaaa/subscription-tracker/config/settings##tag-name}]" variable="_">
+<$list filter="[all[current]tags[]] +[contains{$:/plugins/realaaa/subscription-tracker/config/settings!!tag-name}]" variable="_">
 
 <div class="tc-tiddler-edit-section">
 <h3>Subscription details</h3>
@@ -1714,8 +1714,8 @@ title: $:/plugins/realaaa/subscription-tracker/views/main
 
 \import [[$:/plugins/realaaa/subscription-tracker/macros]]
 
-\procedure subs.tag-name() {{$:/plugins/realaaa/subscription-tracker/config/settings##tag-name}}
-\procedure subs.display-currency() {{$:/plugins/realaaa/subscription-tracker/config/settings##display-currency}}
+\procedure subs.tag-name() {{$:/plugins/realaaa/subscription-tracker/config/settings!!tag-name}}
+\procedure subs.display-currency() {{$:/plugins/realaaa/subscription-tracker/config/settings!!display-currency}}
 
 ! Subscriptions
 
@@ -2048,9 +2048,9 @@ After the existing missing-rate banner, append two banners:
 Also add the display-currency-config-error banner:
 
 ```
-<$list filter="[<sub.rate {{$:/plugins/realaaa/subscription-tracker/config/settings##display-currency}}>match[1]] +[count[]] :filter[!compare:integer:eq[1]]" variable="_">
+<$list filter="[<sub.rate {{$:/plugins/realaaa/subscription-tracker/config/settings!!display-currency}}>match[1]] +[count[]] :filter[!compare:integer:eq[1]]" variable="_">
 <div class="sub-banner sub-banner-error">
-⚠ Display currency `{{$:/plugins/realaaa/subscription-tracker/config/settings##display-currency}}` has no rate, or rate ≠ 1.0. [[Fix in plugin settings|$:/plugins/realaaa/subscription-tracker/config/settings]]
+⚠ Display currency `{{$:/plugins/realaaa/subscription-tracker/config/settings!!display-currency}}` has no rate, or rate ≠ 1.0. [[Fix in plugin settings|$:/plugins/realaaa/subscription-tracker/config/settings]]
 </div>
 </$list>
 ```

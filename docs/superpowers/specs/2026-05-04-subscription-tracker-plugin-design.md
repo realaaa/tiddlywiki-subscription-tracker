@@ -86,7 +86,7 @@ The plugin is built and installed via standard TW node-mode mechanisms:
 ### 5.3 Composition
 
 - All `\function` / `\procedure` definitions live in one tiddler (`macros.tid`). Both `views/main.tid` and `templates/edit.tid` open with `\import [[$:/plugins/realaaa/subscription-tracker/macros]]` to share the same definitions.
-- Settings read at render time via `{{$:/plugins/realaaa/subscription-tracker/config/settings##<field>}}`. Editing the settings tiddler immediately re-renders dependent views — no persistence layer beyond TW's tiddler store.
+- Settings read at render time via `{{$:/plugins/realaaa/subscription-tracker/config/settings!!<field>}}`. Editing the settings tiddler immediately re-renders dependent views — no persistence layer beyond TW's tiddler store.
 - Subscription tiddlers are *user-owned*, not shadows. The plugin defines the *interpretation* (functions, templates, views) but never owns or mutates user data.
 
 ### 5.4 Override discipline
