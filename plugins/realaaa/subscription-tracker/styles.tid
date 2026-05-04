@@ -1,0 +1,95 @@
+title: $:/plugins/realaaa/subscription-tracker/styles
+tags: $:/tags/Stylesheet
+
+/* === Subscription Tracker stylesheet === */
+
+/* Table */
+.sub-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95em;
+    margin-top: 1em;
+}
+.sub-table th,
+.sub-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid <<colour table-border>>;
+    text-align: left;
+    vertical-align: middle;
+}
+.sub-table th {
+    background: <<colour table-header-background>>;
+    font-weight: 600;
+}
+.sub-table td.num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+.sub-table tr:hover {
+    background: <<colour table-footer-background>>;
+}
+
+/* Pills (status + tags) */
+.sub-pill {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-size: 0.85em;
+    margin-right: 4px;
+    color: #fff;
+}
+.sub-status-active   { background: #c2410c; }
+.sub-status-canceled { background: #15803d; }
+.sub-status-trial    { background: #7e22ce; }
+.sub-status-paused   { background: #525252; }
+.sub-tag             { background: #b45309; }
+
+/* Renewal-date highlight */
+.sub-renewal-soon { color: #dc2626; font-weight: 600; }
+.sub-renewal-ok   { color: inherit; }
+
+/* Strict-error glyph */
+.sub-error {
+    color: #dc2626;
+    font-weight: 600;
+}
+
+/* Filter bar */
+.sub-filter-bar {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin: 1em 0;
+    flex-wrap: wrap;
+}
+.sub-filter-bar select {
+    padding: 4px 8px;
+}
+
+/* Totals bar */
+.sub-totals {
+    font-size: 1.1em;
+    margin: 0.5em 0;
+}
+.sub-totals strong { font-weight: 600; }
+
+/* Exclusion banner */
+.sub-banner {
+    padding: 8px 12px;
+    background: <<colour message-background>>;
+    border-left: 3px solid <<colour message-border>>;
+    margin: 0.5em 0;
+    font-size: 0.9em;
+}
+.sub-banner-error {
+    background: #fee2e2;
+    border-left-color: #dc2626;
+}
+
+/* Empty state */
+.sub-empty {
+    padding: 2em;
+    text-align: center;
+    color: <<colour muted-foreground>>;
+    font-style: italic;
+}

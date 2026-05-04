@@ -28,3 +28,4 @@ proc-status-pill-canceled	sub-status-canceled
 proc-tag-pill	sub-tag
 proc-amount-cell-ok	USD 9.99
 proc-amount-cell-bad	sub-error
+styles-loaded	SUBTRACKER-STYLES-PRESENT

@@ -1,0 +1,5 @@
+title: styles-loaded
+
+<$list filter="[all[shadows]tag[$:/tags/Stylesheet]] +[search[sub-table]]">
+SUBTRACKER-STYLES-PRESENT: <<currentTiddler>>
+</$list>
