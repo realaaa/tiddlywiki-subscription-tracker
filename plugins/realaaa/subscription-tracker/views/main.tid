@@ -1,0 +1,29 @@
+title: $:/plugins/realaaa/subscription-tracker/views/main
+
+\import [[$:/plugins/realaaa/subscription-tracker/macros]]
+
+\function subs.tag-name() [{$:/plugins/realaaa/subscription-tracker/config/settings!!tag-name}]
+\function subs.display-currency() [{$:/plugins/realaaa/subscription-tracker/config/settings!!display-currency}]
+
+! Subscriptions
+
+<!-- ===== Totals bar ===== -->
+
+<div class="sub-totals">
+<$let
+    active-count={{{ [tag<subs.tag-name>!field:status[Canceled]count[]] }}}
+    total-monthly={{{ [tag<subs.tag-name>!field:status[Canceled]] :filter[[$:/plugins/realaaa/subscription-tracker/config/rates]getindex{!!currency}!is[blank]] :map[<sub.monthly-display>] +[sum[]fixed[2]] }}}
+    total-yearly={{{ [tag<subs.tag-name>!field:status[Canceled]] :filter[[$:/plugins/realaaa/subscription-tracker/config/rates]getindex{!!currency}!is[blank]] :map[<sub.yearly-display>] +[sum[]fixed[2]] }}}
+    excluded-rate-count={{{ [tag<subs.tag-name>!field:status[Canceled]] :filter[[$:/plugins/realaaa/subscription-tracker/config/rates]getindex{!!currency}is[blank]] +[count[]] }}}
+>
+
+''<<active-count>> active'' — ''<<subs.display-currency>> <<total-monthly>>/mo'' (~''<<subs.display-currency>> <<total-yearly>>/yr'')
+
+<$list filter="[<excluded-rate-count>compare:integer:gt[0]]" variable="_">
+<div class="sub-banner sub-banner-error">
+⚠ <<excluded-rate-count>> sub(s) excluded from totals (missing currency rate). [[Fix rates|$:/plugins/realaaa/subscription-tracker/config/rates]]
+</div>
+</$list>
+
+</$let>
+</div>
