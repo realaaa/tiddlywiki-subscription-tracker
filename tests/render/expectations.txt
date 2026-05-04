@@ -29,8 +29,11 @@ proc-tag-pill	sub-tag
 proc-amount-cell-ok	USD 9.99
 proc-amount-cell-bad	sub-error
 styles-loaded	SUBTRACKER-STYLES-PRESENT
-view-main-with-row	1 active
+view-main-with-row	2 active
 view-main-with-row	13.99
 view-main-with-row	167.88
 view-main-with-row	New subscription
 view-main-with-row	Entertainment
+view-main-with-row	Netflix
+view-main-with-row	sub-status-active
+view-main-with-row	Trial sub(s) missing trial-ends
