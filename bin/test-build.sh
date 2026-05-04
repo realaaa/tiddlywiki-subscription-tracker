@@ -13,8 +13,8 @@ trap 'rm -rf "$OUT_DIR"' EXIT
 
 TIDDLYWIKI_PLUGIN_PATH="$PLUGIN_PATH" \
     tiddlywiki "$WIKI" \
-    --savetiddler "$PLUGIN_TITLE" subscription-tracker.json \
-    --output "$OUT_DIR" >/dev/null
+    --output "$OUT_DIR" \
+    --savetiddler "$PLUGIN_TITLE" subscription-tracker.json >/dev/null
 
 if [[ ! -s "$OUT_DIR/subscription-tracker.json" ]]; then
     echo "FAIL: plugin JSON not produced or empty"
