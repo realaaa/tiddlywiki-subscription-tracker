@@ -1,2 +1,5 @@
 settings-display-currency	AUD
 rates-aud	1
+macro-rate-aud	1
+macro-rate-usd	1.52
+macro-rate-missing	\[\]

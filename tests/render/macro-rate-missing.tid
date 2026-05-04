@@ -1,0 +1,5 @@
+title: macro-rate-missing
+
+\import [[$:/plugins/realaaa/subscription-tracker/macros]]
+
+[<<sub.rate "XYZ">>]

@@ -1,0 +1,5 @@
+title: macro-rate-aud
+
+\import [[$:/plugins/realaaa/subscription-tracker/macros]]
+
+<<sub.rate "AUD">>

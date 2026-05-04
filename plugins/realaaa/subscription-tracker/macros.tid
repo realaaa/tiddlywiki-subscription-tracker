@@ -1,0 +1,5 @@
+title: $:/plugins/realaaa/subscription-tracker/macros
+
+\function sub.rate(ccy)
+[[$:/plugins/realaaa/subscription-tracker/config/rates]getindex<ccy>]
+\end
