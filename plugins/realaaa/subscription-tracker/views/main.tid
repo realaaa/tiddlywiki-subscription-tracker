@@ -27,3 +27,45 @@ title: $:/plugins/realaaa/subscription-tracker/views/main
 
 </$let>
 </div>
+
+<!-- ===== Filter bar ===== -->
+
+<div class="sub-filter-bar">
+
+<label>Status:
+<$select tiddler="$:/state/subscription-tracker/filter" field="status-filter" default="active">
+    <option value="active">Active + Trial + Paused</option>
+    <option value="all">All (including Canceled)</option>
+    <option value="Active">Active only</option>
+    <option value="Trial">Trial only</option>
+    <option value="Paused">Paused only</option>
+    <option value="Canceled">Canceled only</option>
+</$select>
+</label>
+
+<label>Sort:
+<$select tiddler="$:/state/subscription-tracker/filter" field="sort" default="renewal">
+    <option value="name">Name</option>
+    <option value="renewal">Next renewal</option>
+    <option value="monthly-desc">Monthly cost (high→low)</option>
+    <option value="yearly-desc">Yearly cost (high→low)</option>
+</$select>
+</label>
+
+<label>Tag:
+<$select tiddler="$:/state/subscription-tracker/filter" field="tag-filter" default="">
+    <option value="">All</option>
+    <$list filter="[tag<subs.tag-name>tags[]] -[<subs.tag-name>] +[sort[]]" variable="t">
+        <option value=<<t>>><<t>></option>
+    </$list>
+</$select>
+</label>
+
+<$button class="tc-btn-invisible">
+    <$action-createtiddler $basetitle="Untitled subscription" status="Active" tags=<<subs.tag-name>>>
+        <$action-navigate $to=<<createTiddler-title>>/>
+    </$action-createtiddler>
+    + New subscription
+</$button>
+
+</div>

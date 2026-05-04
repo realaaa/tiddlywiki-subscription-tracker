@@ -32,3 +32,5 @@ styles-loaded	SUBTRACKER-STYLES-PRESENT
 view-main-with-row	1 active
 view-main-with-row	13.99
 view-main-with-row	167.88
+view-main-with-row	New subscription
+view-main-with-row	Entertainment
