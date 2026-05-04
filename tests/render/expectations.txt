@@ -3,3 +3,7 @@ rates-aud	1
 macro-rate-aud	1
 macro-rate-usd	1.52
 macro-rate-missing	\[\]
+macro-monthly-native-monthly	13.99
+macro-monthly-native-yearly	10
+macro-monthly-native-quarterly	10
+macro-monthly-native-weekly	43.3
