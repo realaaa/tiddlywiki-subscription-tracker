@@ -2,7 +2,8 @@
     "description": "Test wiki for subscription-tracker plugin development",
     "plugins": [
         "tiddlywiki/filesystem",
-        "tiddlywiki/tiddlyweb"
+        "tiddlywiki/tiddlyweb",
+        "realaaa/subscription-tracker"
     ],
     "themes": [
         "tiddlywiki/vanilla",
