@@ -69,10 +69,12 @@ Run this before tagging a release. Estimated time: 15 minutes.
 - [ ] Tag = `Entertainment` → only Entertainment-tagged subs visible.
 - [ ] Tag = `(All)` → restored.
 
-### S8 — Sort (cosmetic in v1)
+### S8 — Sort
 
-- [ ] Sort dropdown displays the four options: Name / Next renewal / Monthly cost / Yearly cost.
-- [ ] Note: in v1 the table is always sorted by Next renewal regardless of selection. Other options become functional in v0.2.
+- [ ] Sort = `Name` → alphabetical by vendor name.
+- [ ] Sort = `Next renewal` → soonest-renewal first (uses raw `renewal-date` field; Old Domain shows up early because its stored date is in 2010, even though display is auto-rolled).
+- [ ] Sort = `Monthly cost (high→low)` → highest-amount first by raw `amount` field.
+- [ ] Sort = `Yearly cost (high→low)` → identical order to monthly-desc in v1 — both use `!nsort[amount]`. Known limitation: cost sort doesn't normalise across billing-frequency, so a $599/year sub appears above a $13.99/month sub regardless of true monthly equivalent (which happens to be correct in this case but won't be for all combinations). Proper normalisation needs sortsub-with-functions which has a TW 5.4 quirk where `\function` definitions don't get invoked inside sortsub operands. Revisit in v0.2.
 
 ### S9 — Edit form
 
