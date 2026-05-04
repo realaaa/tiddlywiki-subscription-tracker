@@ -49,3 +49,7 @@ title: $:/plugins/realaaa/subscription-tracker/macros
 \procedure sub.tag-pill(tag)
 <span class="sub-pill sub-tag"><$text text=<<tag>>/></span>
 \end
+
+\procedure sub.amount-cell(amount, currency)
+<$list filter="[[$:/plugins/realaaa/subscription-tracker/config/rates]getindex<currency>!is[blank]]" variable="_" emptyMessage="<span class='sub-error' title='Unknown currency'>⚠ <$text text=<<currency>>/> ?</span>"><$text text=<<currency>>/> <$text text=<<amount>>/></$list>
+\end

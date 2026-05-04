@@ -26,3 +26,5 @@ macro-trial-days-no-end	\[\]
 proc-status-pill-active	sub-status-active
 proc-status-pill-canceled	sub-status-canceled
 proc-tag-pill	sub-tag
+proc-amount-cell-ok	USD 9.99
+proc-amount-cell-bad	sub-error

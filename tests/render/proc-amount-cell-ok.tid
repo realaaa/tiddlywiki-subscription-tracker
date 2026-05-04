@@ -1,0 +1,5 @@
+title: proc-amount-cell-ok
+
+\import [[$:/plugins/realaaa/subscription-tracker/macros]]
+
+<<sub.amount-cell "9.99" "USD">>
