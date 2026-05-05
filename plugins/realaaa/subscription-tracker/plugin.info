@@ -3,10 +3,10 @@
     "name": "Subscription Tracker",
     "description": "Notion-style subscriptions table with multi-currency totals, trial tracking, and auto-rolled renewal dates",
     "author": "realaaa",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "core-version": ">=5.4.0",
     "plugin-type": "plugin",
-    "list": "readme",
+    "list": "readme docs/editing-fields",
     "source": "https://github.com/realaaa/tiddlywiki-subscription-tracker",
     "license": "MIT"
 }
