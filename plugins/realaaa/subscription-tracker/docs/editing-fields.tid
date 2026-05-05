@@ -1,0 +1,34 @@
+title: $:/plugins/realaaa/subscription-tracker/docs/editing-fields
+caption: How to edit plugin settings
+
+[[$:/plugins/realaaa/subscription-tracker/config/settings]] stores its values as ''tiddler fields'' — key/value pairs editable through TiddlyWiki's field editor. Fields are ''not'' the same as the body text you read when viewing a tiddler. If you change something in the body and the plugin doesn't react, you've almost certainly edited the body documentation by mistake instead of the field.
+
+!! How to edit a field
+
+# Open the settings tiddler — paste `$:/plugins/realaaa/subscription-tracker/config/settings` into the top search box, or click [[here|$:/plugins/realaaa/subscription-tracker/config/settings]].
+# Click the edit (//pencil//) icon in the tiddler's toolbar.
+# Below the body editor (the large textarea showing the WikiText), you'll see the ''field editor'' — a list of rows, one per field. You should see rows for `display-currency`, `tag-name`, `renewal-soon-days`, and `show-canceled-default`.
+# Change the ''value'' on the right side of the row for the field you want to update. Do not rename the field itself.
+# Click the confirm (//checkmark//) icon to save. The change applies immediately — no wiki restart needed.
+
+!! Verify your change took effect
+
+Open or create any tiddler and paste the transclusion below (replace `tag-name` with whichever field you edited):
+
+```
+{{$:/plugins/realaaa/subscription-tracker/config/settings!!tag-name}}
+```
+
+The rendered tiddler displays the current field value. If it shows your new value, the edit saved correctly and the `Subscriptions` view will already reflect the change.
+
+The same pattern works for `display-currency`, `renewal-soon-days`, and `show-canceled-default`.
+
+!! Common mistake
+
+The settings tiddler includes a ''field reference table'' in its body listing the available fields, defaults, and purposes. That table is documentation only — editing the values inside the table cells does not change any setting. The plugin reads the fields, never the body text.
+
+If a setting change appears to have no effect, re-open the tiddler in edit mode and confirm you changed the value in the //field editor// row, not in the table cell.
+
+!! Currency rates are different
+
+[[$:/plugins/realaaa/subscription-tracker/config/rates]] is a ''JSON-data tiddler'' (its `type` is `application/json`), not a field-style config. Each currency is stored as a JSON key in the tiddler's body, and the values are read via index syntax (`##USD`) rather than field syntax (`!!USD`). To edit a rate, edit the JSON in the body of the rates tiddler directly, or use the //fields// tab in edit mode where TiddlyWiki exposes JSON keys as editable rows.

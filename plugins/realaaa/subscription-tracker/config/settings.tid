@@ -4,24 +4,7 @@ tag-name: subscriptions
 renewal-soon-days: 14
 show-canceled-default: no
 
-This tiddler stores plugin settings as ''tiddler fields'' — the named values shown in the //field editor// when you click the edit (//pencil//) icon. The body of this tiddler (this paragraph, the headings, and the reference table below) is documentation only; editing the body does ''not'' change any setting.
-
-!! How to edit a setting
-
-# Click the edit (//pencil//) icon in this tiddler's toolbar.
-# Below the body editor (the large textarea showing this WikiText) you'll see the ''field editor'' — a list of rows, one per field. You should see rows for `display-currency`, `tag-name`, `renewal-soon-days`, and `show-canceled-default`.
-# Change the ''value'' next to the field you want to update. Do not rename the field itself.
-# Click the confirm (//checkmark//) icon to save. The change applies immediately — no wiki restart needed.
-
-!! Verify your change took effect
-
-Open or create any tiddler and paste the transclusion below (replace `tag-name` with whichever field you edited):
-
-```
-{{$:/plugins/realaaa/subscription-tracker/config/settings!!tag-name}}
-```
-
-The rendered tiddler displays the current field value. If it shows your new value, the edit saved correctly and the `Subscriptions` view will already reflect the change.
+Plugin settings live as ''tiddler fields'' on this tiddler. ''Edit the fields'' (shown in the field editor below the body when you click the pencil icon) — not the table below, which is documentation only. For step-by-step instructions and a verification snippet, see [[How to edit plugin settings|$:/plugins/realaaa/subscription-tracker/docs/editing-fields]].
 
 !! Field reference
 
@@ -30,7 +13,3 @@ The rendered tiddler displays the current field value. If it shows your new valu
 |`tag-name` |`subscriptions` |Tag identifying subscription tiddlers. Change this if you want a different tag (e.g. `subscription`, `recurring`); existing tiddlers will need to be re-tagged to match. |
 |`renewal-soon-days` |`14` |Days-until-renewal threshold for the red highlight on the //Next renewal// column. |
 |`show-canceled-default` |`no` |Whether the status filter starts including Canceled rows (`yes`) or hides them by default (`no`). |
-
-!! Common mistake
-
-Editing values inside the reference ''table above'' changes only the documentation, not the settings — the plugin reads the fields, not the body text. If a setting change appears to have no effect, re-open this tiddler in edit mode and confirm you changed the value in the //field editor// row, not in the table cell.
