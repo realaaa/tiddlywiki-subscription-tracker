@@ -25,7 +25,7 @@ The plugin can be installed two ways depending on how you run TiddlyWiki.
 
 ### A) Single-file drop-in (any TiddlyWiki 5.4+ wiki)
 
-Drag and drop [`dist/subscription-tracker-0.1.1.json`](dist/subscription-tracker-0.1.1.json) onto your wiki's import area. Save the wiki. The shadow tiddler `Subscriptions` becomes available immediately — open it via direct URL fragment `#Subscriptions`, the top search box, or the sidebar's **More → Shadows** tab.
+Download [`subscription-tracker-0.1.1.json`](https://github.com/realaaa/tiddlywiki-subscription-tracker/releases/download/v0.1.1/subscription-tracker-0.1.1.json) (newer versions on the [releases page](https://github.com/realaaa/tiddlywiki-subscription-tracker/releases)) and drag it onto your wiki's import area. Save the wiki. The shadow tiddler `Subscriptions` becomes available immediately — open it via direct URL fragment `#Subscriptions`, the top search box, or the sidebar's **More → Shadows** tab.
 
 ### B) Node.js install (separate-tiddler-files mode)
 
