@@ -32,11 +32,15 @@ Download [`subscription-tracker-0.1.1.json`](https://github.com/realaaa/tiddlywi
 If your wiki runs on `tiddlywiki` from npm with a folder of `.tid` files:
 
 1. Clone or copy this repo somewhere accessible. The plugin folder is `plugins/realaaa/subscription-tracker/`.
-2. Either:
-   - **Symlink** the plugin into your wiki: `ln -s /path/to/this/repo/plugins/realaaa /your-wiki/plugins/realaaa`
-   - **Copy** the folder: `cp -R plugins/realaaa /your-wiki/plugins/realaaa`
-   - **Or set the env var** when starting your wiki: `TIDDLYWIKI_PLUGIN_PATH=/path/to/this/repo/plugins tiddlywiki /your-wiki ...`
-3. Add the plugin to your wiki's `tiddlywiki.info` `plugins` array:
+2. Pick one of the two install shapes below.
+
+   **Option 1 — `TIDDLYWIKI_PLUGIN_PATH` (keeps the `realaaa/` publisher folder)**
+
+   Point TW at the repo's `plugins/` directory at launch:
+   ```sh
+   TIDDLYWIKI_PLUGIN_PATH=/path/to/this/repo/plugins tiddlywiki /your-wiki --listen
+   ```
+   Then add the plugin to your wiki's `tiddlywiki.info` `plugins` array:
    ```json
    {
      "plugins": [
@@ -46,8 +50,17 @@ If your wiki runs on `tiddlywiki` from npm with a folder of `.tid` files:
      ]
    }
    ```
-   The env var only adds search paths — TW still needs the `plugins` array entry to load it.
-4. Restart your wiki.
+   The env var supplies the search path; the info file says which plugin to load.
+
+   **Option 2 — drop into your wiki's local `plugins/` folder (flat, no env var)**
+
+   The wiki's own `plugins/` folder is flat — each immediate subdirectory is loaded as a plugin directly. So copy or symlink the **inner** `subscription-tracker/` folder, **not** the `realaaa/` publisher folder:
+   ```sh
+   cp -R /path/to/this/repo/plugins/realaaa/subscription-tracker /your-wiki/plugins/subscription-tracker
+   # or: ln -s /path/to/this/repo/plugins/realaaa/subscription-tracker /your-wiki/plugins/subscription-tracker
+   ```
+   Plugins under the wiki's local `plugins/` folder load automatically — do **not** add `realaaa/subscription-tracker` to the `tiddlywiki.info` `plugins` array, or TW will also try to resolve it via the search path and warn `Cannot find plugin`.
+3. Restart your wiki.
 
 ## Use
 
@@ -98,10 +111,12 @@ bin/run-render-tests.sh
 # Smoke test the plugin builds cleanly
 bin/test-build.sh
 
-# Rebuild dist JSON
+# Rebuild dist JSON (drag-drop import bundle: a 1-element array containing
+# the plugin tiddler, with the inner shadow tiddlers stringified into its
+# `text` field — this is the shape TW's import accepts).
 TIDDLYWIKI_PLUGIN_PATH=$(pwd)/plugins tiddlywiki tests/wiki \
     --output dist \
-    --savetiddler '$:/plugins/realaaa/subscription-tracker' subscription-tracker-0.1.1.json
+    --rendertiddler '$:/core/templates/exporters/JsonFile' subscription-tracker-0.1.1.json application/json "" exportFilter '[[$:/plugins/realaaa/subscription-tracker]]'
 ```
 
 If render tests behave weirdly, check `tests/wiki/tiddlers/` for stale fixture leftovers from interrupted runs and clean them:
