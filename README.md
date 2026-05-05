@@ -4,7 +4,7 @@ A vanilla TiddlyWiki 5.4+ plugin that turns `subscriptions`-tagged tiddlers into
 
 **Plugin id:** `$:/plugins/realaaa/subscription-tracker` · **License:** MIT · **Current version:** 0.1.1
 
-![Screenshot reference (from Notion, the design target)](example%20subscriptions%20summary%20table%20view%20from%20Notion.png)
+![Subscriptions view: totals bar, status + tag filters, sortable table](assets/subscriptions-view.png)
 
 ## Features
 
@@ -55,6 +55,8 @@ If your wiki runs on `tiddlywiki` from npm with a folder of `.tid` files:
 2. **Add subscriptions.** Click **+ New subscription** on the view, or tag any tiddler with `subscriptions` plus 1+ category tag (`Entertainment`, `Productivity`, etc.). The custom edit form appears whenever you edit a `subscriptions`-tagged tiddler.
 3. **Required fields per subscription:** `status`, `billing-frequency`, `amount`, `currency`, plus `renewal-date` for non-Canceled subs and `trial-ends` for Trial subs.
 
+![Structured edit form for a `subscriptions`-tagged tiddler](assets/subscription-edit-form.png)
+
 ## Configure
 
 - **`$:/plugins/realaaa/subscription-tracker/config/settings`** — display currency (default AUD), tag-name (default `subscriptions`), renewal-soon threshold in days (default 14), show-canceled-default (default `no`).
@@ -79,9 +81,7 @@ tests/fixtures/                         manual end-to-end fixture set
 tests/test-plan.md                      12-scenario manual test
 bin/run-render-tests.sh                 fixture-based render runner (39 tests)
 bin/test-build.sh                       plugin-packaging smoke
-docs/superpowers/specs/                 design spec (source of intent)
-docs/superpowers/plans/                 implementation plan
-subscription-tracker-analysis.md        prior ecosystem analysis
+assets/                                 README screenshots
 ```
 
 To work on the plugin:
@@ -110,8 +110,11 @@ If render tests behave weirdly, check `tests/wiki/tiddlers/` for stale fixture l
 find tests/wiki/tiddlers/ -name "*.tid" -not -name '$__StoryList.tid' -delete
 ```
 
+The plugin ships as a set of shadow tiddlers under `$:/plugins/realaaa/subscription-tracker/`:
+
+![Plugin internals: shadow tiddlers that make up the plugin](assets/plugin-internals.png)
+
 ## Credits
 
-- Design discussion + ecosystem analysis: see `subscription-tracker-analysis.md`.
-- Notion-style design reference: the screenshot in repo root.
 - Inspiration: the [TiddlyWiki forum thread on subscription tracking](https://talk.tiddlywiki.org/t/subscriptions-tracker-in-tiddlywiki/12631) (Sunny, Springer, Eric Shulman).
+- Notion-style table layout as the design target.
