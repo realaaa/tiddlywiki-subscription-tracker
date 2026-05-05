@@ -2,7 +2,7 @@
 
 A vanilla TiddlyWiki 5.4+ plugin that turns `subscriptions`-tagged tiddlers into a Notion-style table with multi-currency monthly + yearly cost math, trial countdowns, render-time auto-rolled renewal dates, and a structured editor.
 
-**Plugin id:** `$:/plugins/realaaa/subscription-tracker` · **License:** MIT · **Current version:** 0.1.1
+**Plugin id:** `$:/plugins/realaaa/subscription-tracker` · **License:** MIT · **Current version:** 0.1.2
 
 ![Subscriptions view: totals bar, status + tag filters, sortable table](assets/subscriptions-view.png)
 
@@ -25,7 +25,7 @@ The plugin can be installed two ways depending on how you run TiddlyWiki.
 
 ### A) Single-file drop-in (any TiddlyWiki 5.4+ wiki)
 
-Download [`subscription-tracker-0.1.1.json`](https://github.com/realaaa/tiddlywiki-subscription-tracker/releases/download/v0.1.1/subscription-tracker-0.1.1.json) (newer versions on the [releases page](https://github.com/realaaa/tiddlywiki-subscription-tracker/releases)) and drag it onto your wiki's import area. Save the wiki. The shadow tiddler `Subscriptions` becomes available immediately — open it via direct URL fragment `#Subscriptions`, the top search box, or the sidebar's **More → Shadows** tab.
+Download [`subscription-tracker-0.1.2.json`](https://github.com/realaaa/tiddlywiki-subscription-tracker/releases/download/v0.1.2/subscription-tracker-0.1.2.json) (newer versions on the [releases page](https://github.com/realaaa/tiddlywiki-subscription-tracker/releases)) and drag it onto your wiki's import area. Save the wiki. The shadow tiddler `Subscriptions` becomes available immediately — open it via direct URL fragment `#Subscriptions`, the top search box, or the sidebar's **More → Shadows** tab.
 
 ### B) Node.js install (separate-tiddler-files mode)
 
@@ -116,7 +116,7 @@ bin/test-build.sh
 # `text` field — this is the shape TW's import accepts).
 TIDDLYWIKI_PLUGIN_PATH=$(pwd)/plugins tiddlywiki tests/wiki \
     --output dist \
-    --rendertiddler '$:/core/templates/exporters/JsonFile' subscription-tracker-0.1.1.json application/json "" exportFilter '[[$:/plugins/realaaa/subscription-tracker]]'
+    --rendertiddler '$:/core/templates/exporters/JsonFile' subscription-tracker-0.1.2.json application/json "" exportFilter '[[$:/plugins/realaaa/subscription-tracker]]'
 ```
 
 If render tests behave weirdly, check `tests/wiki/tiddlers/` for stale fixture leftovers from interrupted runs and clean them:
