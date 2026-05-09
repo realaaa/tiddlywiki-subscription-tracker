@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.11] - 2026-05-09
+
+### Added
+- Per-status totals breakdown in the `Subscriptions` view header. Where v0.1.10 showed a single line aggregating all non-Cancelled subs (mislabeled "active" because it counted Active + Trial + Paused together), v0.1.11 shows four lines — one per status — each with its own count and monthly/yearly totals in the configured display currency. Closes [#2](https://github.com/realaaa/tiddlywiki-subscription-tracker/issues/2).
+
+  ```
+  1 active    — AUD 13.99/mo (~AUD 167.88/yr)
+  1 trial     — AUD  9.99/mo (~AUD 119.88/yr)
+  1 paused    — AUD  8.00/mo (~AUD  96.00/yr)
+  1 cancelled — AUD  5.00/mo (~AUD  60.00/yr)
+  ```
+
+  The Cancelled line lets you quantify ongoing savings from cancellations; the Paused line shows what you'd resume paying if you reactivated; the Trial line warns about subs about to start charging. Each row is computed via a new `subs.status-totals-row(s, label)` procedure parametrised on status value and visible label.
+
+### Changed
+- `excluded-rate-count` (the missing-currency-rate warning) now considers all subs across all statuses, not just non-Cancelled. Previously the count omitted Cancelled subs missing rates; now that Cancelled rows show totals, those exclusions need to be surfaced too.
+- The "active" label in the v0.1.10 totals row now actually means status=Active. Users reading "11 active" from older versions were seeing a count of Active + Trial + Paused; they will now see only Active. The old aggregate is recoverable as the sum of the new Active + Trial + Paused rows.
+
+### Tests
+- Added `tests/render/_fixture-Paused.tid` and `tests/render/_fixture-Canceled.tid` so the `view-main-with-row` render test exercises all four status rows. New expectations check for `1 active`, `1 trial`, `1 paused`, `1 cancelled` substrings. 42 render tests pass (was 39).
+
 ## [0.1.10] - 2026-05-09
 
 ### Fixed
@@ -82,7 +103,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial public release. v1 feature set: Notion-style subscriptions table; multi-currency monthly + yearly totals (single configurable display currency); render-time auto-rolled renewal dates (no field churn); trial countdown; structured EditTemplate cascade for `subscriptions`-tagged tiddlers; status, sort, and tag filters; **+ New subscription** button.
 - Two small JS filter modules (`daysuntil.js`, `nextrenewal.js`) to fill in date math missing from TW 5.4 core.
 
-[Unreleased]: https://github.com/realaaa/tiddlywiki-subscription-tracker/compare/v0.1.10...HEAD
+[Unreleased]: https://github.com/realaaa/tiddlywiki-subscription-tracker/compare/v0.1.11...HEAD
+[0.1.11]: https://github.com/realaaa/tiddlywiki-subscription-tracker/releases/tag/v0.1.11
 [0.1.10]: https://github.com/realaaa/tiddlywiki-subscription-tracker/releases/tag/v0.1.10
 [0.1.9]: https://github.com/realaaa/tiddlywiki-subscription-tracker/releases/tag/v0.1.9
 [0.1.8]: https://github.com/realaaa/tiddlywiki-subscription-tracker/releases/tag/v0.1.8

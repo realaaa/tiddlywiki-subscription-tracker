@@ -4,6 +4,14 @@ title: $:/plugins/realaaa/subscription-tracker/views/main
 
 \function subs.tag-name() [{$:/plugins/realaaa/subscription-tracker/config/settings!!tag-name}]
 \function subs.display-currency() [{$:/plugins/realaaa/subscription-tracker/config/settings!!display-currency}]
+
+\procedure subs.status-totals-row(s, label)
+<$let
+    cnt={{{ [tag<subs.tag-name>field:status<s>count[]] }}}
+    mon={{{ [tag<subs.tag-name>field:status<s>] :filter[[$:/plugins/realaaa/subscription-tracker/config/rates]getindex{!!currency}!is[blank]] :map[<sub.monthly-display>] +[sum[]fixed[2]] }}}
+    yr={{{ [tag<subs.tag-name>field:status<s>] :filter[[$:/plugins/realaaa/subscription-tracker/config/rates]getindex{!!currency}!is[blank]] :map[<sub.yearly-display>] +[sum[]fixed[2]] }}}
+>''<<cnt>> <<label>>'' — <<subs.display-currency>> <<mon>>/mo (~<<subs.display-currency>> <<yr>>/yr)</$let>
+\end
 \function subs.status-filter() [{$:/state/subscription-tracker/filter!!status-filter}!is[blank]] :else[[active]]
 \function subs.tag-filter-set() [{$:/state/subscription-tracker/filter!!tag-filter}!is[blank]] :else[[__NONE__]]
 \function subs.tag-filter() [{$:/state/subscription-tracker/filter!!tag-filter}]
@@ -50,15 +58,18 @@ title: $:/plugins/realaaa/subscription-tracker/views/main
 
 <div class="sub-totals">
 <$let
-    active-count={{{ [tag<subs.tag-name>!field:status[Canceled]count[]] }}}
-    total-monthly={{{ [tag<subs.tag-name>!field:status[Canceled]] :filter[[$:/plugins/realaaa/subscription-tracker/config/rates]getindex{!!currency}!is[blank]] :map[<sub.monthly-display>] +[sum[]fixed[2]] }}}
-    total-yearly={{{ [tag<subs.tag-name>!field:status[Canceled]] :filter[[$:/plugins/realaaa/subscription-tracker/config/rates]getindex{!!currency}!is[blank]] :map[<sub.yearly-display>] +[sum[]fixed[2]] }}}
-    excluded-rate-count={{{ [tag<subs.tag-name>!field:status[Canceled]] :filter[[$:/plugins/realaaa/subscription-tracker/config/rates]getindex{!!currency}is[blank]] +[count[]] }}}
+    excluded-rate-count={{{ [tag<subs.tag-name>] :filter[[$:/plugins/realaaa/subscription-tracker/config/rates]getindex{!!currency}is[blank]] +[count[]] }}}
     trial-no-end-count={{{ [tag<subs.tag-name>field:status[Trial]!has[trial-ends]] +[count[]] }}}
     display-rate={{{ [[$:/plugins/realaaa/subscription-tracker/config/rates]getindex<subs.display-currency>] }}}
 >
 
-''<<active-count>> active'' — ''<<subs.display-currency>> <<total-monthly>>/mo'' (~''<<subs.display-currency>> <<total-yearly>>/yr'')
+<<subs.status-totals-row "Active" "active">>
+
+<<subs.status-totals-row "Trial" "trial">>
+
+<<subs.status-totals-row "Paused" "paused">>
+
+<<subs.status-totals-row "Canceled" "cancelled">>
 
 <$list filter="[<display-rate>!match[1]]" variable="_">
 <div class="sub-banner sub-banner-error">
