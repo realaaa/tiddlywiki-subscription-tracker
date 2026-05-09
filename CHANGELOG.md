@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.7] - 2026-05-09
+
+### Fixed
+- **Convert to subscription** now actually appends the configured tag. The button in v0.1.6 referenced `<subs.tag-name>` via `\import [[macros]]`, but `subs.tag-name` is defined inline in `views/main.tid`, not in `macros.tid` — so the function was out of scope in the button's tiddler. Both the gate filter and the listops subfilter silently evaluated to empty, which is why the button rendered (gate failed open) and set the four core fields, but never added the tag. Switched to text-reference syntax `{$:/.../config/settings!!tag-name}` directly in both the gate filter and the subfilter — no function-scope dependency.
+
+### Documentation
+- README "Convert an existing tiddler" section rewritten. The button is **already** in TiddlyWiki's overflow dropdown by default (the down-arrow ▾ icon next to edit/close) — TW's `$:/core/ui/Buttons/more-tiddler-actions` automatically lists every ViewToolbar button whose visibility config is `hide`, which is exactly what the plugin ships. So the previous instructions to "enable via More → Tools" were misleading: enabling promotes the button from the dropdown into the main toolbar, useful only for bulk-onboarding sessions. Default access is one click in the dropdown.
+
 ## [0.1.6] - 2026-05-09
 
 ### Added
@@ -51,7 +59,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial public release. v1 feature set: Notion-style subscriptions table; multi-currency monthly + yearly totals (single configurable display currency); render-time auto-rolled renewal dates (no field churn); trial countdown; structured EditTemplate cascade for `subscriptions`-tagged tiddlers; status, sort, and tag filters; **+ New subscription** button.
 - Two small JS filter modules (`daysuntil.js`, `nextrenewal.js`) to fill in date math missing from TW 5.4 core.
 
-[Unreleased]: https://github.com/realaaa/tiddlywiki-subscription-tracker/compare/v0.1.6...HEAD
+[Unreleased]: https://github.com/realaaa/tiddlywiki-subscription-tracker/compare/v0.1.7...HEAD
+[0.1.7]: https://github.com/realaaa/tiddlywiki-subscription-tracker/releases/tag/v0.1.7
 [0.1.6]: https://github.com/realaaa/tiddlywiki-subscription-tracker/releases/tag/v0.1.6
 [0.1.5]: https://github.com/realaaa/tiddlywiki-subscription-tracker/releases/tag/v0.1.5
 [0.1.4]: https://github.com/realaaa/tiddlywiki-subscription-tracker/releases/tag/v0.1.4
