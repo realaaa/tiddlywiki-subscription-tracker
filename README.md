@@ -2,7 +2,7 @@
 
 A vanilla TiddlyWiki 5.4+ plugin that turns `subscriptions`-tagged tiddlers into a Notion-style table with multi-currency monthly + yearly cost math, trial countdowns, render-time auto-rolled renewal dates, and a structured editor.
 
-**Plugin id:** `$:/plugins/realaaa/subscription-tracker` · **License:** MIT · **Current version:** 0.1.5
+**Plugin id:** `$:/plugins/realaaa/subscription-tracker` · **License:** MIT · **Current version:** 0.1.6
 
 ![Subscriptions view: totals bar, status + tag filters, sortable table](assets/subscriptions-view.png)
 
@@ -25,7 +25,7 @@ The plugin can be installed two ways depending on how you run TiddlyWiki.
 
 ### A) Single-file drop-in (any TiddlyWiki 5.4+ wiki)
 
-Download [`subscription-tracker-0.1.5.json`](https://github.com/realaaa/tiddlywiki-subscription-tracker/releases/download/v0.1.5/subscription-tracker-0.1.5.json) (newer versions on the [releases page](https://github.com/realaaa/tiddlywiki-subscription-tracker/releases)) and drag it onto your wiki's import area. Save the wiki. The shadow tiddler `Subscriptions` becomes available immediately — open it via direct URL fragment `#Subscriptions`, the top search box, or the sidebar's **More → Shadows** tab.
+Download [`subscription-tracker-0.1.6.json`](https://github.com/realaaa/tiddlywiki-subscription-tracker/releases/download/v0.1.6/subscription-tracker-0.1.6.json) (newer versions on the [releases page](https://github.com/realaaa/tiddlywiki-subscription-tracker/releases)) and drag it onto your wiki's import area. Save the wiki. The shadow tiddler `Subscriptions` becomes available immediately — open it via direct URL fragment `#Subscriptions`, the top search box, or the sidebar's **More → Shadows** tab.
 
 ### B) Node.js install (separate-tiddler-files mode)
 
@@ -69,6 +69,21 @@ If your wiki runs on `tiddlywiki` from npm with a folder of `.tid` files:
 3. **Required fields per subscription:** `status`, `billing-frequency`, `amount`, `currency`, plus `renewal-date` for non-Canceled subs and `trial-ends` for Trial subs.
 
 ![Structured edit form for a `subscriptions`-tagged tiddler](assets/subscription-edit-form.png)
+
+### Convert an existing tiddler to a subscription
+
+If you already have a tiddler for a vendor (e.g. an existing `Netflix` or `Spotify` note with body content, links, history) and want to start tracking it as a subscription without losing the body or other fields, the plugin ships an optional **Convert to subscription** view-toolbar button. It is **hidden by default** to avoid cluttering every tiddler's toolbar — enable it only when you're onboarding existing tiddlers.
+
+1. Open any tiddler's tiddler-info area (click the **i**-circle icon in the toolbar) and switch to the **Tools** tab.
+2. Find the row labelled **Convert to subscription** and check its checkbox. The button now appears in the view toolbar of every non-subscription, non-system tiddler.
+3. Open the tiddler you want to convert (e.g. `Netflix`) and click **Convert to subscription** in its toolbar. The plugin will:
+   - append the configured tag (default `subscriptions`) to the tiddler's existing tags,
+   - set `status=Active`, `billing-frequency=Monthly`, `currency=<your display currency>`, `renewal-date=today + 30 days`,
+   - create empty placeholder fields (`amount`, `trial-ends`, `vendor-url`, `cancel-url`, `payment-method`) only if they don't already exist on the tiddler,
+   - open the tiddler in edit mode so you can fill in `amount` and adjust the other defaults.
+4. When you're done converting, you can uncheck the row in **More → Tools** to hide the button again.
+
+The button only renders on tiddlers that are not already subscriptions and not system tiddlers, so once a tiddler is converted, the button disappears from its toolbar.
 
 ## Configure
 
@@ -116,7 +131,7 @@ bin/test-build.sh
 # `text` field — this is the shape TW's import accepts).
 TIDDLYWIKI_PLUGIN_PATH=$(pwd)/plugins tiddlywiki tests/wiki \
     --output dist \
-    --rendertiddler '$:/core/templates/exporters/JsonFile' subscription-tracker-0.1.5.json application/json "" exportFilter '[[$:/plugins/realaaa/subscription-tracker]]'
+    --rendertiddler '$:/core/templates/exporters/JsonFile' subscription-tracker-0.1.6.json application/json "" exportFilter '[[$:/plugins/realaaa/subscription-tracker]]'
 ```
 
 If render tests behave weirdly, check `tests/wiki/tiddlers/` for stale fixture leftovers from interrupted runs and clean them:

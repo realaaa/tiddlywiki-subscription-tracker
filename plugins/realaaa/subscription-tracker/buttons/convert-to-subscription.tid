@@ -1,0 +1,35 @@
+title: $:/plugins/realaaa/subscription-tracker/buttons/convert-to-subscription
+tags: $:/tags/ViewToolbar
+caption: {{$:/core/images/plus-button}} Convert to subscription
+description: Add subscription tracking fields and tag to this tiddler
+
+\whitespace trim
+\import [[$:/plugins/realaaa/subscription-tracker/macros]]
+
+<$list filter="[<currentTiddler>] -[tag<subs.tag-name>] -[is[system]]" variable="_">
+<$button
+	tooltip="Add subscription tracking fields and tag to this tiddler"
+	aria-label="Convert to subscription"
+	class=<<tv-config-toolbar-class>>
+>
+	<$action-listops $field="tags" $subfilter="+[<subs.tag-name>]"/>
+	<$action-setfield
+		status="Active"
+		billing-frequency="Monthly"
+		currency={{$:/plugins/realaaa/subscription-tracker/config/settings!!display-currency}}
+		renewal-date={{{ [daysfromnow[30]] }}}
+	/>
+	<$list filter="[<currentTiddler>!has[amount]]" variable="_"><$action-setfield amount=""/></$list>
+	<$list filter="[<currentTiddler>!has[trial-ends]]" variable="_"><$action-setfield trial-ends=""/></$list>
+	<$list filter="[<currentTiddler>!has[vendor-url]]" variable="_"><$action-setfield vendor-url=""/></$list>
+	<$list filter="[<currentTiddler>!has[cancel-url]]" variable="_"><$action-setfield cancel-url=""/></$list>
+	<$list filter="[<currentTiddler>!has[payment-method]]" variable="_"><$action-setfield payment-method=""/></$list>
+	<$action-sendmessage $message="tm-edit-tiddler" $param=<<currentTiddler>>/>
+	<$list filter="[<tv-config-toolbar-icons>match[yes]]" variable="_">
+		{{$:/core/images/plus-button}}
+	</$list>
+	<$list filter="[<tv-config-toolbar-text>match[yes]]" variable="_">
+		<span class="tc-btn-text">Convert to subscription</span>
+	</$list>
+</$button>
+</$list>
