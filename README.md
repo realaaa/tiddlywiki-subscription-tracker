@@ -149,5 +149,5 @@ The plugin ships as a set of shadow tiddlers under `$:/plugins/realaaa/subscript
 
 ## Credits
 
-- Inspiration: the [TiddlyWiki forum thread on subscription tracking](https://talk.tiddlywiki.org/t/subscriptions-tracker-in-tiddlywiki/12631) (Sunny, Springer, Eric Shulman).
+- Inspiration: the [TiddlyWiki forum thread on subscription tracking](https://talk.tiddlywiki.org/t/subscriptions-tracker-in-tiddlywiki/12631) (Sunny, Springer, Eric Shulman, TonyM).
 - Notion-style table layout as the design target.
