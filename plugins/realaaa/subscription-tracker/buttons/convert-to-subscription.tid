@@ -11,7 +11,7 @@ description: Add subscription tracking fields and tag to this tiddler
 	aria-label="Convert to subscription"
 	class=<<tv-config-toolbar-class>>
 >
-	<$action-listops $field="tags" $subfilter="+[{$:/plugins/realaaa/subscription-tracker/config/settings!!tag-name}]"/>
+	<$action-listops $tags="[{$:/plugins/realaaa/subscription-tracker/config/settings!!tag-name}]"/>
 	<$action-setfield
 		status="Active"
 		billing-frequency="Monthly"

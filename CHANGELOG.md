@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.8] - 2026-05-09
+
+### Fixed
+- **Convert to subscription no longer wipes existing tags.** Critical data-loss bug introduced in v0.1.6 (and not actually fixed in v0.1.7): the button used `<$action-listops $field="tags" $subfilter="+[<tagname>]"/>`. I had `+[X]` semantics wrong — in TiddlyWiki filter syntax, `+[X]` doesn't mean "add X to the list", it means "**pipe** the previous output as input to filter `[X]`". The widget internally builds the filter `[all[]] +[X]`: `[all[]]` returns the existing tags list, then `+[X]` pipes those tags into filter `[X]` which returns just X regardless of input. Result: every existing tag gets dropped, only the configured subscription tag remains. User report: "BUT - it replaced ALL existing tags with ONE new tag sub - this is DATA LOSS". Closes [#3](https://github.com/realaaa/tiddlywiki-subscription-tracker/issues/3).
+- Switched the action to use the purpose-built `$tags` parameter with no-prefix filter: `<$action-listops $tags="[{$:/.../config/settings!!tag-name}]"/>`. The listops widget's `$tags` handler computes `stringifyList(oldtags) + " " + filter`, so the full filter for a tiddler tagged `[Entertainment, Streaming]` becomes `[[Entertainment]] [[Streaming]] [<tag-name>]`. Multiple no-prefix runs union with de-dup, producing `[Entertainment, Streaming, <tag-name>]`. The widget also short-circuits the field write when the new tag list is identical (after sort) to the old one, so re-clicking on an already-converted tiddler is a no-op.
+
 ## [0.1.7] - 2026-05-09
 
 ### Fixed
@@ -59,7 +65,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial public release. v1 feature set: Notion-style subscriptions table; multi-currency monthly + yearly totals (single configurable display currency); render-time auto-rolled renewal dates (no field churn); trial countdown; structured EditTemplate cascade for `subscriptions`-tagged tiddlers; status, sort, and tag filters; **+ New subscription** button.
 - Two small JS filter modules (`daysuntil.js`, `nextrenewal.js`) to fill in date math missing from TW 5.4 core.
 
-[Unreleased]: https://github.com/realaaa/tiddlywiki-subscription-tracker/compare/v0.1.7...HEAD
+[Unreleased]: https://github.com/realaaa/tiddlywiki-subscription-tracker/compare/v0.1.8...HEAD
+[0.1.8]: https://github.com/realaaa/tiddlywiki-subscription-tracker/releases/tag/v0.1.8
 [0.1.7]: https://github.com/realaaa/tiddlywiki-subscription-tracker/releases/tag/v0.1.7
 [0.1.6]: https://github.com/realaaa/tiddlywiki-subscription-tracker/releases/tag/v0.1.6
 [0.1.5]: https://github.com/realaaa/tiddlywiki-subscription-tracker/releases/tag/v0.1.5
