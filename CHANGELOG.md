@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.10] - 2026-05-09
+
+### Fixed
+- **Convert to Subscription is now actually in the ▾ dropdown by default.** The shipped visibility-config shadow at `$:/config/ViewToolbarButtons/Visibility/<button-title>` had its text stored as `"hide\n"` (trailing newline) because it was authored as a `.tid` body and the file ended with a newline. TW's main-toolbar gate `:filter[lookup[]!match[hide]]` and the dropdown's `<$reveal type="match" text="hide">` both use **strict equality** — `"hide\n" !== "hide"`. So both gates failed: the button stayed in the main toolbar (the stray ⊕ icon) and never appeared in the dropdown alongside core actions. Switched the .tid to field-form (`text: hide` as a header field, no body) so the text is exactly `"hide"`. Verified with a render probe: lookup value is now `"hide"` (4 chars), toolbar gate output is empty (button hidden), dropdown gate output is 1 (button shown). Closes [#4](https://github.com/realaaa/tiddlywiki-subscription-tracker/issues/4).
+
+### Notes for upgraders
+- Users on v0.1.6–v0.1.9 who **never** enabled the button via **More → Tools** will see the button move from the main toolbar into the dropdown automatically when they upgrade to v0.1.10. No cleanup needed.
+- Users who **did** enable the button via Tools (per v0.1.6's old README) still have a real-tiddler override at the same config path with text `show`. That override still wins over the now-correctly-shipped shadow `hide`. Delete the override tiddler manually one time — the README's "Upgrading from v0.1.6" callout walks through the path.
+
 ## [0.1.9] - 2026-05-09
 
 ### Changed
@@ -73,7 +82,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial public release. v1 feature set: Notion-style subscriptions table; multi-currency monthly + yearly totals (single configurable display currency); render-time auto-rolled renewal dates (no field churn); trial countdown; structured EditTemplate cascade for `subscriptions`-tagged tiddlers; status, sort, and tag filters; **+ New subscription** button.
 - Two small JS filter modules (`daysuntil.js`, `nextrenewal.js`) to fill in date math missing from TW 5.4 core.
 
-[Unreleased]: https://github.com/realaaa/tiddlywiki-subscription-tracker/compare/v0.1.9...HEAD
+[Unreleased]: https://github.com/realaaa/tiddlywiki-subscription-tracker/compare/v0.1.10...HEAD
+[0.1.10]: https://github.com/realaaa/tiddlywiki-subscription-tracker/releases/tag/v0.1.10
 [0.1.9]: https://github.com/realaaa/tiddlywiki-subscription-tracker/releases/tag/v0.1.9
 [0.1.8]: https://github.com/realaaa/tiddlywiki-subscription-tracker/releases/tag/v0.1.8
 [0.1.7]: https://github.com/realaaa/tiddlywiki-subscription-tracker/releases/tag/v0.1.7
