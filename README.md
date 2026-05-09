@@ -86,7 +86,7 @@ The action only appears in the dropdown for tiddlers that are not already subscr
 
 **Tip — pin to main toolbar for bulk onboarding.** If you have many tiddlers to convert in one session, you can promote the action from the dropdown to the main view toolbar: open any tiddler's info area (click the **i**-circle), switch to the **Tools** tab, find the **Convert to Subscription** row, and check its checkbox. To put it back in the dropdown, uncheck the row.
 
-**Upgrading from v0.1.6.** If you followed v0.1.6's earlier README and enabled the button via Tools, your wiki now has a real-tiddler override at `$:/config/ViewToolbarButtons/Visibility/$:/plugins/realaaa/subscription-tracker/buttons/convert-to-subscription` with text `show`. That override survives plugin upgrades and pins the button to the main toolbar (the ⊕ icon). To put the action back in the dropdown, paste that title into the top search box, open the result, and delete the tiddler — the plugin's shadow default (`hide`, which means "show in the ▾ dropdown") will take over.
+![Here is where and How this option looks like - expand a triangle menu for a tiddler](assets/tiddler-convert-to-subscription.png)
 
 ## Configure
 
