@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.9] - 2026-05-09
+
+### Changed
+- Convert button label is now **Convert to Subscription** (capital S on Subscription) — applied to caption, aria-label, and the button text. User preference, sentence-cased noun reads better in the dropdown alongside TW core actions like `clone`, `delete`, `info`.
+
+### Documentation
+- README "Convert an existing tiddler" section gains an **Upgrading from v0.1.6** callout. Anyone who followed v0.1.6's older README and enabled the button via **More → Tools** will have a leftover real-tiddler override at `$:/config/ViewToolbarButtons/Visibility/$:/plugins/realaaa/subscription-tracker/buttons/convert-to-subscription` with text `show` — which survives plugin upgrades and pins the button to the main toolbar instead of letting the shadow default (`hide`, which routes it into the ▾ dropdown) take effect. README now tells users to delete that override tiddler one time.
+
 ## [0.1.8] - 2026-05-09
 
 ### Fixed
@@ -65,7 +73,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial public release. v1 feature set: Notion-style subscriptions table; multi-currency monthly + yearly totals (single configurable display currency); render-time auto-rolled renewal dates (no field churn); trial countdown; structured EditTemplate cascade for `subscriptions`-tagged tiddlers; status, sort, and tag filters; **+ New subscription** button.
 - Two small JS filter modules (`daysuntil.js`, `nextrenewal.js`) to fill in date math missing from TW 5.4 core.
 
-[Unreleased]: https://github.com/realaaa/tiddlywiki-subscription-tracker/compare/v0.1.8...HEAD
+[Unreleased]: https://github.com/realaaa/tiddlywiki-subscription-tracker/compare/v0.1.9...HEAD
+[0.1.9]: https://github.com/realaaa/tiddlywiki-subscription-tracker/releases/tag/v0.1.9
 [0.1.8]: https://github.com/realaaa/tiddlywiki-subscription-tracker/releases/tag/v0.1.8
 [0.1.7]: https://github.com/realaaa/tiddlywiki-subscription-tracker/releases/tag/v0.1.7
 [0.1.6]: https://github.com/realaaa/tiddlywiki-subscription-tracker/releases/tag/v0.1.6

@@ -2,7 +2,7 @@
 
 A vanilla TiddlyWiki 5.4+ plugin that turns `subscriptions`-tagged tiddlers into a Notion-style table with multi-currency monthly + yearly cost math, trial countdowns, render-time auto-rolled renewal dates, and a structured editor.
 
-**Plugin id:** `$:/plugins/realaaa/subscription-tracker` · **License:** MIT · **Current version:** 0.1.8
+**Plugin id:** `$:/plugins/realaaa/subscription-tracker` · **License:** MIT · **Current version:** 0.1.9
 
 ![Subscriptions view: totals bar, status + tag filters, sortable table](assets/subscriptions-view.png)
 
@@ -25,7 +25,7 @@ The plugin can be installed two ways depending on how you run TiddlyWiki.
 
 ### A) Single-file drop-in (any TiddlyWiki 5.4+ wiki)
 
-Download [`subscription-tracker-0.1.8.json`](https://github.com/realaaa/tiddlywiki-subscription-tracker/releases/download/v0.1.8/subscription-tracker-0.1.8.json) (newer versions on the [releases page](https://github.com/realaaa/tiddlywiki-subscription-tracker/releases)) and drag it onto your wiki's import area. Save the wiki. The shadow tiddler `Subscriptions` becomes available immediately — open it via direct URL fragment `#Subscriptions`, the top search box, or the sidebar's **More → Shadows** tab.
+Download [`subscription-tracker-0.1.9.json`](https://github.com/realaaa/tiddlywiki-subscription-tracker/releases/download/v0.1.9/subscription-tracker-0.1.9.json) (newer versions on the [releases page](https://github.com/realaaa/tiddlywiki-subscription-tracker/releases)) and drag it onto your wiki's import area. Save the wiki. The shadow tiddler `Subscriptions` becomes available immediately — open it via direct URL fragment `#Subscriptions`, the top search box, or the sidebar's **More → Shadows** tab.
 
 ### B) Node.js install (separate-tiddler-files mode)
 
@@ -72,11 +72,11 @@ If your wiki runs on `tiddlywiki` from npm with a folder of `.tid` files:
 
 ### Convert an existing tiddler to a subscription
 
-If you already have a tiddler for a vendor (e.g. an existing `Netflix` or `Spotify` note with body content, links, history) and want to start tracking it as a subscription without losing the body or other fields, the plugin ships a **Convert to subscription** action. It lives in the tiddler's overflow dropdown so it doesn't clutter the main toolbar of every tiddler in your wiki.
+If you already have a tiddler for a vendor (e.g. an existing `Netflix` or `Spotify` note with body content, links, history) and want to start tracking it as a subscription without losing the body or other fields, the plugin ships a **Convert to Subscription** action. It lives in the tiddler's overflow dropdown so it doesn't clutter the main toolbar of every tiddler in your wiki.
 
 1. Open the tiddler you want to convert (e.g. `Netflix`).
 2. Click the down-arrow **▾** icon in the tiddler's toolbar (TiddlyWiki's standard "more actions" dropdown — usually next to the edit and close icons).
-3. Click **Convert to subscription** in the dropdown. The plugin will:
+3. Click **Convert to Subscription** in the dropdown. The plugin will:
    - append the configured tag (default `subscriptions`) to the tiddler's existing tags,
    - set `status=Active`, `billing-frequency=Monthly`, `currency=<your display currency>`, `renewal-date=today + 30 days`,
    - create empty placeholder fields (`amount`, `trial-ends`, `vendor-url`, `cancel-url`, `payment-method`) only if they don't already exist on the tiddler (so any pre-existing values are preserved),
@@ -84,7 +84,9 @@ If you already have a tiddler for a vendor (e.g. an existing `Netflix` or `Spoti
 
 The action only appears in the dropdown for tiddlers that are not already subscriptions and not system tiddlers — once a tiddler is converted, the entry disappears from its dropdown automatically.
 
-**Tip — pin to main toolbar for bulk onboarding.** If you have many tiddlers to convert in one session, you can promote the action from the dropdown to the main view toolbar: open any tiddler's info area (click the **i**-circle), switch to the **Tools** tab, find the **Convert to subscription** row, and check its checkbox. To put it back in the dropdown, uncheck the row.
+**Tip — pin to main toolbar for bulk onboarding.** If you have many tiddlers to convert in one session, you can promote the action from the dropdown to the main view toolbar: open any tiddler's info area (click the **i**-circle), switch to the **Tools** tab, find the **Convert to Subscription** row, and check its checkbox. To put it back in the dropdown, uncheck the row.
+
+**Upgrading from v0.1.6.** If you followed v0.1.6's earlier README and enabled the button via Tools, your wiki now has a real-tiddler override at `$:/config/ViewToolbarButtons/Visibility/$:/plugins/realaaa/subscription-tracker/buttons/convert-to-subscription` with text `show`. That override survives plugin upgrades and pins the button to the main toolbar (the ⊕ icon). To put the action back in the dropdown, paste that title into the top search box, open the result, and delete the tiddler — the plugin's shadow default (`hide`, which means "show in the ▾ dropdown") will take over.
 
 ## Configure
 
@@ -132,7 +134,7 @@ bin/test-build.sh
 # `text` field — this is the shape TW's import accepts).
 TIDDLYWIKI_PLUGIN_PATH=$(pwd)/plugins tiddlywiki tests/wiki \
     --output dist \
-    --rendertiddler '$:/core/templates/exporters/JsonFile' subscription-tracker-0.1.8.json application/json "" exportFilter '[[$:/plugins/realaaa/subscription-tracker]]'
+    --rendertiddler '$:/core/templates/exporters/JsonFile' subscription-tracker-0.1.9.json application/json "" exportFilter '[[$:/plugins/realaaa/subscription-tracker]]'
 ```
 
 If render tests behave weirdly, check `tests/wiki/tiddlers/` for stale fixture leftovers from interrupted runs and clean them:

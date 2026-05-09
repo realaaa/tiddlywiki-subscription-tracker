@@ -1,6 +1,6 @@
 title: $:/plugins/realaaa/subscription-tracker/buttons/convert-to-subscription
 tags: $:/tags/ViewToolbar
-caption: {{$:/core/images/plus-button}} Convert to subscription
+caption: {{$:/core/images/plus-button}} Convert to Subscription
 description: Add subscription tracking fields and tag to this tiddler
 
 \whitespace trim
@@ -8,7 +8,7 @@ description: Add subscription tracking fields and tag to this tiddler
 <$list filter="[<currentTiddler>] -[tag{$:/plugins/realaaa/subscription-tracker/config/settings!!tag-name}] -[is[system]]" variable="_">
 <$button
 	tooltip="Add subscription tracking fields and tag to this tiddler"
-	aria-label="Convert to subscription"
+	aria-label="Convert to Subscription"
 	class=<<tv-config-toolbar-class>>
 >
 	<$action-listops $tags="[{$:/plugins/realaaa/subscription-tracker/config/settings!!tag-name}]"/>
@@ -28,7 +28,7 @@ description: Add subscription tracking fields and tag to this tiddler
 		{{$:/core/images/plus-button}}
 	</$list>
 	<$list filter="[<tv-config-toolbar-text>match[yes]]" variable="_">
-		<span class="tc-btn-text">Convert to subscription</span>
+		<span class="tc-btn-text">Convert to Subscription</span>
 	</$list>
 </$button>
 </$list>
