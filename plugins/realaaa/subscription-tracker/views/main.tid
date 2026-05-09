@@ -115,7 +115,19 @@ title: $:/plugins/realaaa/subscription-tracker/views/main
 </label>
 
 <$button class="tc-btn-invisible">
-    <$action-createtiddler $basetitle="Untitled subscription" status="Active" tags=<<subs.tag-name>>>
+    <$action-createtiddler
+        $basetitle="Untitled subscription"
+        tags=<<subs.tag-name>>
+        status="Active"
+        billing-frequency="Monthly"
+        amount=""
+        currency={{$:/plugins/realaaa/subscription-tracker/config/settings!!display-currency}}
+        renewal-date={{{ [daysfromnow[30]] }}}
+        trial-ends=""
+        vendor-url=""
+        cancel-url=""
+        payment-method=""
+    >
         <$action-navigate $to=<<createTiddler-title>>/>
     </$action-createtiddler>
     + New subscription
