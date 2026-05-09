@@ -1,7 +1,7 @@
 title: macro-soon-yes
 status: Active
 billing-frequency: Monthly
-renewal-date: 20260515000000
+renewal-date: 20260519000000
 
 \import [[$:/plugins/realaaa/subscription-tracker/macros]]
 
