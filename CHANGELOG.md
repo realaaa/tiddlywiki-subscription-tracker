@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.12] - 2026-05-14
+
+### Fixed
+- **The structured "Subscription details" edit panel now actually renders.** The EditTemplate's gating filter at `plugins/realaaa/subscription-tracker/templates/edit.tid:7` used `[all[current]tags[]] +[contains{...!!tag-name}]`. The TW `contains` filter operator does **not** do string equality on its input — it looks up a list-typed field on each input title (default field: `list`) and checks whether that list contains the operand. So for our case it asked, for each tag of the current tiddler, "is there a tiddler titled `<tag>` whose `list` field contains the value of `tag-name`?" — which is always no. The `<$list>` body was therefore suppressed and the form panel with the Status / Billing-frequency / Currency dropdowns never appeared in v0.1.11 or any earlier version. The only way to set `billing-frequency` was the standard raw field editor at the bottom of the edit view, which silently accepts any string and produces no validation. Replaced the broken filter with `[all[current]tags[]match{...!!tag-name}]` (exact equality, which is what was intended). Added render test `edit-form-renders` to prevent regression.
+- Non-Monthly billing frequencies are no longer dropped from totals when set via the dropdown (consequence of the edit form actually working).
+
+### Changed
+- **Billing-frequency value renamed `Yearly` → `Annual`** (more conventional English term). Touches `macros.tid` (`sub.monthly-native`, `sub.period-days`), `templates/edit.tid` (dropdown option), and four fixtures (`Adobe`, `Notion-Trial`, `Old-Renewal`, `Paused-NoRenewal`). The column header **Yearly (AUD)** and the sort option **Yearly cost (high→low)** keep the word *Yearly* — they describe the annualised cost regardless of billing-frequency value.
+
+### Added
+- **Fail-visible banner** when a subscription has a `billing-frequency` outside the allowed set `{Monthly, Annual, Quarterly, Weekly}`. Renders as `⚠ N sub(s) have an unrecognised billing-frequency. Allowed values: …` in the totals area, matching the existing missing-rate and missing-trial-ends banners. Matches the strict-data convention used elsewhere — previously such rows silently rendered `—` in the Monthly/Yearly columns and were excluded from totals with no visible warning, which is how the v0.1.11 bug went unnoticed.
+
+### Tests
+- New `tests/render/edit-form-renders.tid` — fixture tagged `subscriptions` transcluding the edit template; expects `Subscription details` in output. Would have caught the broken filter regression that shipped in every prior version.
+- New `tests/render/macro-monthly-native-annual.tid` — covers the renamed billing-frequency value through `sub.monthly-native`.
+- Renamed `tests/render/macro-yearly-display-yearly.tid` → `macro-yearly-display-annual.tid`. Removed obsolete `macro-monthly-native-yearly.tid` (replaced by the `-annual` version).
+- New `tests/render/_fixture-BadFreq.tid` + new expectation `view-main-with-row :: unrecognised billing-frequency` — covers the banner.
+- 43 render tests pass (was 42 in v0.1.11). The remaining 1 failure (`macro-soon-yes`) is a pre-existing date-drift on a fixture with hardcoded `renewal-date: 20260519`, unrelated to this release.
+
+### Breaking
+- Any subscription previously stored with `billing-frequency: Yearly` will be flagged by the new banner after upgrade and excluded from totals until updated to `Annual`. With the structured edit form now actually rendering, the fix is one click in the Billing-frequency dropdown.
+
 ## [0.1.11] - 2026-05-09
 
 ### Added
