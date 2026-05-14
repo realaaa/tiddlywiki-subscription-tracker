@@ -3,7 +3,7 @@
     "name": "Subscription Tracker",
     "description": "Notion-style subscriptions table with multi-currency totals, trial tracking, and auto-rolled renewal dates",
     "author": "realaaa",
-    "version": "0.1.11",
+    "version": "0.1.12",
     "core-version": ">=5.4.0",
     "plugin-type": "plugin",
     "list": "readme docs/editing-fields",

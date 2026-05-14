@@ -4,14 +4,13 @@ macro-rate-aud	1
 macro-rate-usd	1.52
 macro-rate-missing	\[\]
 macro-monthly-native-monthly	13.99
-macro-monthly-native-yearly	10
 macro-monthly-native-quarterly	10
 macro-monthly-native-weekly	43.3
 macro-monthly-display-aud	10
 macro-monthly-display-usd	15.2
 macro-monthly-display-missing-rate	\[\]
 macro-yearly-display-aud	120
-macro-yearly-display-yearly	100
+macro-yearly-display-annual	100
 macro-next-renewal-future	2099
 macro-next-renewal-canceled	20100101
 macro-next-renewal-empty	\[\]
@@ -40,3 +39,6 @@ view-main-with-row	Entertainment
 view-main-with-row	Netflix
 view-main-with-row	sub-status-active
 view-main-with-row	Trial sub(s) missing trial-ends
+view-main-with-row	unrecognised billing-frequency
+edit-form-renders	Subscription details
+macro-monthly-native-annual	10

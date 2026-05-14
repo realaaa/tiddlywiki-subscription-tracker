@@ -1,0 +1,8 @@
+title: edit-form-renders
+tags: subscriptions
+billing-frequency: Monthly
+amount: 9.99
+currency: AUD
+status: TestOnly
+
+<$tiddler tiddler="edit-form-renders"><$transclude tiddler="$:/plugins/realaaa/subscription-tracker/templates/edit" mode="block"/></$tiddler>

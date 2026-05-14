@@ -5,7 +5,7 @@ title: $:/plugins/realaaa/subscription-tracker/macros
 \end
 
 \function sub.monthly-native()
-[{!!billing-frequency}match[Monthly]then{!!amount}] :else[{!!billing-frequency}match[Yearly]then{!!amount}divide[12]] :else[{!!billing-frequency}match[Quarterly]then{!!amount}divide[3]] :else[{!!billing-frequency}match[Weekly]then{!!amount}multiply[4.33]]
+[{!!billing-frequency}match[Monthly]then{!!amount}] :else[{!!billing-frequency}match[Annual]then{!!amount}divide[12]] :else[{!!billing-frequency}match[Quarterly]then{!!amount}divide[3]] :else[{!!billing-frequency}match[Weekly]then{!!amount}multiply[4.33]]
 \end
 
 \procedure sub.display-formula() [[$:/plugins/realaaa/subscription-tracker/config/rates]getindex{!!currency}multiply<sub.monthly-native>]
@@ -20,7 +20,7 @@ title: $:/plugins/realaaa/subscription-tracker/macros
 
 \function sub.period-days()
 [{!!billing-frequency}match[Monthly]then[30.44]]
-:else[{!!billing-frequency}match[Yearly]then[365.25]]
+:else[{!!billing-frequency}match[Annual]then[365.25]]
 :else[{!!billing-frequency}match[Quarterly]then[91.31]]
 :else[{!!billing-frequency}match[Weekly]then[7]]
 \end

@@ -1,0 +1,7 @@
+title: macro-monthly-native-annual
+amount: 120
+billing-frequency: Annual
+
+\import [[$:/plugins/realaaa/subscription-tracker/macros]]
+
+<$tiddler tiddler="macro-monthly-native-annual"><<sub.monthly-native>></$tiddler>

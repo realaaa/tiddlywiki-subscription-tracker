@@ -4,7 +4,7 @@ list-before: $:/core/ui/EditTemplate/body
 
 \import [[$:/plugins/realaaa/subscription-tracker/macros]]
 
-<$list filter="[all[current]tags[]] +[contains{$:/plugins/realaaa/subscription-tracker/config/settings!!tag-name}]" variable="_">
+<$list filter="[all[current]tags[]match{$:/plugins/realaaa/subscription-tracker/config/settings!!tag-name}]" variable="_">
 
 <div class="tc-tiddler-edit-section">
 <h3>Subscription details</h3>
@@ -23,7 +23,7 @@ list-before: $:/core/ui/EditTemplate/body
   <td>''Billing frequency''</td>
   <td><$select tiddler=<<currentTiddler>> field="billing-frequency" default="Monthly">
         <option value="Monthly">Monthly</option>
-        <option value="Yearly">Yearly</option>
+        <option value="Annual">Annual</option>
         <option value="Quarterly">Quarterly</option>
         <option value="Weekly">Weekly</option>
       </$select></td>

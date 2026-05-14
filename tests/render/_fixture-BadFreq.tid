@@ -1,0 +1,7 @@
+title: BadFreq Service
+tags: subscriptions
+status: TestOnly
+billing-frequency: Bogus
+amount: 50
+currency: AUD
+renewal-date: 21000101000000

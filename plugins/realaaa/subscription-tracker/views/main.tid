@@ -60,6 +60,7 @@ title: $:/plugins/realaaa/subscription-tracker/views/main
 <$let
     excluded-rate-count={{{ [tag<subs.tag-name>] :filter[[$:/plugins/realaaa/subscription-tracker/config/rates]getindex{!!currency}is[blank]] +[count[]] }}}
     trial-no-end-count={{{ [tag<subs.tag-name>field:status[Trial]!has[trial-ends]] +[count[]] }}}
+    unknown-freq-count={{{ [tag<subs.tag-name>!field:status[Canceled]] :filter[get[billing-frequency]!match[Monthly]!match[Annual]!match[Quarterly]!match[Weekly]] +[count[]] }}}
     display-rate={{{ [[$:/plugins/realaaa/subscription-tracker/config/rates]getindex<subs.display-currency>] }}}
 >
 
@@ -86,6 +87,12 @@ title: $:/plugins/realaaa/subscription-tracker/views/main
 <$list filter="[<trial-no-end-count>compare:integer:gt[0]]" variable="_">
 <div class="sub-banner sub-banner-error">
 ⚠ <<trial-no-end-count>> Trial sub(s) missing trial-ends date.
+</div>
+</$list>
+
+<$list filter="[<unknown-freq-count>compare:integer:gt[0]]" variable="_">
+<div class="sub-banner sub-banner-error">
+⚠ <<unknown-freq-count>> sub(s) have an unrecognised billing-frequency. Allowed values: `Monthly`, `Annual`, `Quarterly`, `Weekly`.
 </div>
 </$list>
 
